@@ -1,0 +1,6 @@
+__pycache__
+/venv
+/helpers/cors/__pycache__
+/helpers/database/__pycache__
+/resourses/__pycache__
+/model/__pycache__

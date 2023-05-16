@@ -12,10 +12,9 @@ app = Flask(__name__)
 api_bp = Blueprint('api', __name__)
 api = Api(api_bp, prefix="/api")
 
-# configure the SQLite database, relative to the app instance folder
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+DB_URL = "postgresql://joalison:12345@localhost:5432/aehmotor"
+app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 
 # initialize the app with the extension
 db.init_app(app)
