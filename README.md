@@ -64,4 +64,4 @@ $ flask db migrate -m "Initial migration."
 Em seguida, você pode aplicar as alterações descritas pelo script de migração ao seu banco de dados:
 ```
 $ flask db upgrade
-```****
+```
