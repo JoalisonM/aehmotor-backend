@@ -20,9 +20,14 @@ class Endereco(db.Model):
   referencia = db.Column(db.String, nullable=False)
   logradouro = db.Column(db.String, nullable=False)
   pessoa_id = db.Column(db.Integer, db.ForeignKey('pessoa.id'))
+  cidade_id = db.Column(db.Integer, db.ForeignKey('cidade.id'))
 
-  def __init__(self):
-    pass
+  def __init__(self, cep, numero, complemento, referencia, logradouro):
+    self.cep = cep
+    self.numero = numero
+    self.complemento = complemento
+    self.referencia = referencia
+    self.logradouro = logradouro
 
   def __repr__(self):
     return f'<Endereço>'

@@ -29,9 +29,9 @@ class PessoaResource(Resource):
         args = parser.parse_args()
         name = args["name"]
         email = args["email"]
-        nascimento = args["email"]
-        telefone = args["email"]
-        endereco = args["email"]
+        nascimento = args["nascimento"]
+        telefone = args["telefone"]
+        endereco = args["endereco"]
 
         pessoa = Pessoa(name, email, nascimento, telefone, endereco)
 
