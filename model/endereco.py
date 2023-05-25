@@ -11,7 +11,6 @@ endereco_fields = {
   'logradouro': fields.String,
 }
 
-
 class Endereco(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   cep = db.Column(db.String, nullable=False)
@@ -19,15 +18,17 @@ class Endereco(db.Model):
   complemento = db.Column(db.String, nullable=False)
   referencia = db.Column(db.String, nullable=False)
   logradouro = db.Column(db.String, nullable=False)
-  pessoa_id = db.Column(db.Integer, db.ForeignKey('pessoa.id'))
-  cidade_id = db.Column(db.Integer, db.ForeignKey('cidade.id'))
+  idCidade = db.Column(db.Integer, db.ForeignKey('cidade.id'))
+  pessoa = db.relationship("Pessoa", uselist=False, backref="endereco")
+  instituicaoEnsino = db.relationship("InstituicaoEnsino", uselist=False, backref="endereco")
 
-  def __init__(self, cep, numero, complemento, referencia, logradouro):
+  def __init__(self, cep, numero, complemento, referencia, logradouro, idCidade):
     self.cep = cep
     self.numero = numero
-    self.complemento = complemento
+    self.idCidade = idCidade
     self.referencia = referencia
     self.logradouro = logradouro
+    self.complemento = complemento
 
   def __repr__(self):
     return f'<Endereço>'

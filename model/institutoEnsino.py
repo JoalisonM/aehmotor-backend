@@ -13,13 +13,13 @@ class InstitutoEnsino(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   nome = db.Column(db.String, nullable=False)
   telefone = db.Column(db.String, nullable=False)
-  endereco = db.relationship("Endereco", uselist=False, backref="pessoa")
+  idEndereco = db.Column(db.Integer, db.ForeignKey('endereco.id'))
 
-  def __init__(self, nome, telefone, endereco):
+  def __init__(self, nome, telefone, idEndereco):
     super().__init__()
     self.nome = nome
     self.telefone = telefone
-    self.endereco = endereco
+    self.idEndereco = idEndereco
 
   def __repr__(self):
     return f'<Endereço>'
