@@ -17,14 +17,14 @@ class Pessoa(db.Model):
   nascimento = db.Column(db.Date, nullable=False)
   email = db.Column(db.String, unique=True, nullable=False)
   telefone = db.Column(db.String, unique=True, nullable=False)
-  endereco = db.relationship("Endereco", uselist=False, backref="pessoa")
+  idEndereco = db.Column(db.Integer, db.ForeignKey('endereco.id'))
 
-  def __init__(self, nome, email, nascimento, telefone, endereco):
+  def __init__(self, nome, email, nascimento, telefone, idEndereco):
     self.nome = nome
     self.email = email
     self.nascimento = nascimento
     self.telefone = telefone
-    self.endereco = endereco
+    self.idEndereco = idEndereco
 
   def __repr__(self):
     return f'<Pessoa {self.nome}>'
