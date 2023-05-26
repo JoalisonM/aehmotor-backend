@@ -1,5 +1,4 @@
 from flask_restful import fields
-
 from helpers.database import db
 
 endereco_fields = {
@@ -10,7 +9,6 @@ endereco_fields = {
   'referencia': fields.String,
   'logradouro': fields.String,
 }
-
 
 class Endereco(db.Model):
   id = db.Column(db.Integer, primary_key=True)

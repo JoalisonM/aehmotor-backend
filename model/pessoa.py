@@ -1,3 +1,4 @@
+from flask import Flask
 from flask_restful import fields
 from helpers.database import db
 from model.endereco import endereco_fields
@@ -9,6 +10,7 @@ pessoa_fields = {
   'email': fields.String,
   'telefone': fields.String,
   'endereco': endereco_fields,
+  'senha':fields.String,
 }
 
 class Pessoa(db.Model):
@@ -18,13 +20,15 @@ class Pessoa(db.Model):
   email = db.Column(db.String, unique=True, nullable=False)
   telefone = db.Column(db.String, unique=True, nullable=False)
   endereco = db.relationship("Endereco", uselist=False, backref="pessoa")
+  senha=db.Colum(db.String,unique=True,nullable=False)
 
-  def __init__(self, nome, email, nascimento, telefone, endereco):
+  def __init__(self, nome, email, nascimento, telefone, endereco,senha):
     self.nome = nome
     self.email = email
     self.nascimento = nascimento
     self.telefone = telefone
     self.endereco = endereco
+    self.senha=senha
 
   def __repr__(self):
     return f'<Pessoa {self.nome}>'
