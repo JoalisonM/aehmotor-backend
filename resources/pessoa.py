@@ -4,6 +4,9 @@ from flask_restful import Resource, reqparse, marshal_with, marshal
 from model.pessoa import *
 from model.endereco import *
 from model.message import *
+from model.aluno import *
+from model.passageiro import *
+from model.funcionario import *
 from helpers.database import db
 # from helpers.base_logger import logger
 
