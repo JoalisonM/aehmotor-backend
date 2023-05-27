@@ -3,6 +3,9 @@ from flask_restful import Resource, reqparse, marshal_with, marshal
 
 from model.pessoa import *
 from model.endereco import *
+from model.cidade import *
+from model.institutoEnsino import *
+from model.uf import *
 from model.message import *
 from helpers.database import db
 # from helpers.base_logger import logger
@@ -29,9 +32,9 @@ class PessoaResource(Resource):
         args = parser.parse_args()
         name = args["name"]
         email = args["email"]
-        nascimento = args["email"]
-        telefone = args["email"]
-        endereco = args["email"]
+        nascimento = args["nascimento"]
+        telefone = args["telefone"]
+        endereco = args["endereco"]
 
         pessoa = Pessoa(name, email, nascimento, telefone, endereco)
 

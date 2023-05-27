@@ -17,10 +17,17 @@ class Endereco(db.Model):
   complemento = db.Column(db.String, nullable=False)
   referencia = db.Column(db.String, nullable=False)
   logradouro = db.Column(db.String, nullable=False)
-  pessoa_id = db.Column(db.Integer, db.ForeignKey('pessoa.id'))
+  idCidade = db.Column(db.Integer, db.ForeignKey('cidade.id'))
+  pessoa = db.relationship("Pessoa", uselist=False, backref="endereco")
+  instituicaoEnsino = db.relationship("InstituicaoEnsino", uselist=False, backref="endereco")
 
-  def __init__(self):
-    pass
+  def __init__(self, cep, numero, complemento, referencia, logradouro, idCidade):
+    self.cep = cep
+    self.numero = numero
+    self.idCidade = idCidade
+    self.referencia = referencia
+    self.logradouro = logradouro
+    self.complemento = complemento
 
   def __repr__(self):
     return f'<Endereço>'
