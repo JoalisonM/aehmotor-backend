@@ -3,7 +3,7 @@ from flask import Flask, Blueprint
 
 from helpers.cors import cors
 from helpers.database import db, migrate
-from resources.pessoa import PessoaResource
+from resources.pessoa import *
 
 # create the app
 app = Flask(__name__)

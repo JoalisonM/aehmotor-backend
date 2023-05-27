@@ -7,6 +7,9 @@ from model.cidade import *
 from model.institutoEnsino import *
 from model.uf import *
 from model.message import *
+from model.aluno import *
+from model.passageiro import *
+from model.funcionario import *
 from helpers.database import db
 # from helpers.base_logger import logger
 
