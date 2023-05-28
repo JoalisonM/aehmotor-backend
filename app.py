@@ -3,7 +3,7 @@ from flask import Flask, Blueprint
 
 from helpers.cors import cors
 from helpers.database import db, migrate
-from resources.pessoa import *
+from resources.pessoa import PessoaResource
 
 # create the app
 app = Flask(__name__)
@@ -12,7 +12,7 @@ app = Flask(__name__)
 api_bp = Blueprint('api', __name__)
 api = Api(api_bp, prefix="/api")
 
-DB_URL = "postgresql://postgres:1234@localhost:5432/aehmotor"
+DB_URL = "postgresql://postgres:12345@localhost:5432/aehmotor"
 app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

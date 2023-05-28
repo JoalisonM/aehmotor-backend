@@ -1,7 +1,6 @@
 from flask_restful import fields
 from helpers.database import db
-from model.pessoa import *
-#from model.prefeitura import prefeitura_fields
+from model.pessoa import Pessoa
 
 funcionario_fields = {
   'id': fields.Integer,
@@ -9,23 +8,27 @@ funcionario_fields = {
   'nascimento': fields.DateTime,
   'email': fields.String,
   'telefone': fields.String,
-  'endereco': endereco_fields,
-  #'prefeitura': prefeitura_fields,
+  'senha' : fields.String,
+  'idEndereco': fields.Integer,
   'cargo' : fields.String,
 }
 
-class Funcionario(Pessoa, db.Model):
+class Funcionario(Pessoa):
+  __tablename__ = "funcionario"
 
-  __mapper_args__ = {'polymorphic_identify': 'funcionario'}
+  idPessoa = db.Column(db.Integer ,db.ForeignKey("pessoa.id"), primary_key=True)
+  cargo = db.Column(db.String, nullable=False)
 
-  #id = db.relationship("Pessoa", useList=False, backref="pessoa")
-  #prefeitura = db.relationship("Prefeitura", useList=False, backref="funcionario")
-  cargo = db.Column(db.String, unique=True, nullable=False)
+  prefeitura = db.relationship("Prefeitura", uselist=False, backref="funcionario")
 
-  def __init__(self, nome, nascimento, email, telefone, idEndereco, prefeitura, cargo):
-    super().__init__(nome, nascimento, email, telefone, idEndereco)
-    self.prefeitura = prefeitura
+  __mapper_args__ = {
+    "polymorphic_identity": "funcionario",
+    "polymorphic_on": cargo
+  }
+
+  def __init__(self, nome, email, nascimento, telefone, senha, idEndereco, cargo):
+    super().__init__(nome, email, nascimento, telefone, senha, idEndereco)
     self.cargo = cargo
-    
+
   def __repr__(self):
     return f'<Funcionario>'
