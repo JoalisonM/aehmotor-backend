@@ -3,7 +3,8 @@ from flask import Flask, Blueprint
 
 from helpers.cors import cors
 from helpers.database import db, migrate
-from resources.pessoa import PessoaResource
+from resources.aluno import Alunos, AlunoById
+from resources.pessoa import Pessoas, PessoaById
 
 # create the app
 app = Flask(__name__)
@@ -21,8 +22,10 @@ db.init_app(app)
 cors.init_app(app)
 migrate.init_app(app, db)
 
-api.add_resource(PessoaResource, '/pessoas')
-# api.add_resource(PeopleResource, '/pessoas/<int:person_id>')
+api.add_resource(Alunos, '/alunos')
+api.add_resource(AlunoById, '/alunos/<int:idPessoa>')
+api.add_resource(Pessoas, '/pessoas')
+api.add_resource(PessoaById, '/pessoas/<int:id>')
 
 # Blueprints para Restful
 app.register_blueprint(api_bp)

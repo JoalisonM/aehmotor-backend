@@ -5,11 +5,10 @@ from model.pessoa import Pessoa
 funcionario_fields = {
   'id': fields.Integer,
   'nome': fields.String,
-  'nascimento': fields.DateTime,
+  'nascimento': fields.String,
   'email': fields.String,
   'telefone': fields.String,
   'senha' : fields.String,
-  'idEndereco': fields.Integer,
   'cargo' : fields.String,
 }
 
@@ -26,8 +25,8 @@ class Funcionario(Pessoa):
     "polymorphic_on": cargo
   }
 
-  def __init__(self, nome, email, nascimento, telefone, senha, idEndereco, cargo):
-    super().__init__(nome, email, nascimento, telefone, senha, idEndereco)
+  def __init__(self, nome, email, nascimento, telefone, senha, cargo):
+    super().__init__(nome, email, nascimento, telefone, senha)
     self.cargo = cargo
 
   def __repr__(self):
