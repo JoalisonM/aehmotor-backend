@@ -1,6 +1,5 @@
 from flask_restful import fields
 from helpers.database import db
-from model.endereco import endereco_fields
 
 pessoa_fields = {
   'id': fields.Integer,
@@ -8,22 +7,33 @@ pessoa_fields = {
   'nascimento': fields.DateTime,
   'email': fields.String,
   'telefone': fields.String,
-  'endereco': endereco_fields,
+  'senha': fields.String,
+  'idEndereco': fields.Integer,
 }
 
 class Pessoa(db.Model):
+  __tablename__ = "pessoa"
+
   id = db.Column(db.Integer, primary_key=True)
   nome = db.Column(db.String, nullable=False)
-  nascimento = db.Column(db.Date, nullable=False)
   email = db.Column(db.String, unique=True, nullable=False)
+  nascimento = db.Column(db.Date, nullable=False)
   telefone = db.Column(db.String, unique=True, nullable=False)
+  senha = db.Column(db.String, nullable=False)
   idEndereco = db.Column(db.Integer, db.ForeignKey('endereco.id'))
+  tipo = db.Column(db.String, nullable=False)
 
-  def __init__(self, nome, email, nascimento, telefone, idEndereco):
+  __mapper_args__ = {
+    "polymorphic_identity": "pessoa",
+    "polymorphic_on": tipo
+  }
+
+  def __init__(self, nome, email, nascimento, telefone, senha, idEndereco):
     self.nome = nome
     self.email = email
-    self.nascimento = nascimento
+    self.senha = senha
     self.telefone = telefone
+    self.nascimento = nascimento
     self.idEndereco = idEndereco
 
   def __repr__(self):
