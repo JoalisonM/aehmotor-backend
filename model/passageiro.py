@@ -13,8 +13,8 @@ class Passageiro(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   idAluno = db.Column(db.Integer, db.ForeignKey('aluno.id'))
-  cidadeOrigem = db.Column(db.String, unique=True, nullable=False)
-  cidadeDestino = db.Column(db.String, unique=True, nullable=False)
+  cidadeOrigem = db.Column(db.String, nullable=False)
+  cidadeDestino = db.Column(db.String, nullable=False)
 
   def __init__(self, idAluno, cidadeOrigem, cidadeDestino):
     self.idAluno = idAluno
