@@ -1,19 +1,2 @@
-2023-05-28 20:32:23,149 WARNING _internal _log  * Debugger is active!
-2023-05-28 20:32:23,161 INFO _internal _log  * Debugger PIN: 121-133-082
-2023-05-28 20:32:24,791 INFO pessoa get Pessoas listadas com sucesso!
-2023-05-28 20:32:25,325 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:32:25] "GET /api/pessoas HTTP/1.1" 200 -
-2023-05-28 20:32:49,639 INFO pessoa get Pessoa 10 encontrada com sucesso!
-2023-05-28 20:32:49,641 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:32:49] "GET /api/pessoas/10 HTTP/1.1" 200 -
-2023-05-28 20:33:24,771 INFO pessoa post Pessoa cadastrada com sucesso!
-2023-05-28 20:33:24,778 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:33:24] "[35m[1mPOST /api/pessoas HTTP/1.1[0m" 201 -
-2023-05-28 20:33:27,728 INFO pessoa get Pessoas listadas com sucesso!
-2023-05-28 20:33:27,733 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:33:27] "GET /api/pessoas HTTP/1.1" 200 -
-2023-05-28 20:33:49,242 INFO pessoa put Pessoa cadastrada com sucesso!
-2023-05-28 20:33:49,249 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:33:49] "PUT /api/pessoas/8 HTTP/1.1" 200 -
-2023-05-28 20:33:53,772 INFO pessoa get Pessoas listadas com sucesso!
-2023-05-28 20:33:53,779 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:33:53] "GET /api/pessoas HTTP/1.1" 200 -
-2023-05-28 20:34:23,438 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:34:23] "DELETE /api/pessoas/11 HTTP/1.1" 200 -
-2023-05-28 20:34:29,548 INFO pessoa get Pessoas listadas com sucesso!
-2023-05-28 20:34:29,556 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:34:29] "GET /api/pessoas HTTP/1.1" 200 -
-2023-05-28 20:37:05,835 INFO aluno get Alunos listados com sucesso!
-2023-05-28 20:37:05,862 INFO _internal _log 127.0.0.1 - - [28/May/2023 20:37:05] "GET /api/alunos HTTP/1.1" 200 -
+2023-05-28 20:44:17,214 WARNING _internal _log  * Debugger is active!
+2023-05-28 20:44:17,225 INFO _internal _log  * Debugger PIN: 121-133-082
