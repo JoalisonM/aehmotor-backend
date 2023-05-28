@@ -11,7 +11,7 @@ class Prefeitura(db.Model):
   __tablename__ = "prefeitura"
 
   id = db.Column(db.Integer, primary_key=True)
-  secretario = db.Column(db.Integer, db.ForeignKey('funcionario.id'))
+  secretario = db.Column(db.Integer, db.ForeignKey('funcionario.idPessoa'))
   idEndereco = db.Column(db.Integer, db.ForeignKey('endereco.id'))
 
   rota = db.relationship("Rota", uselist=False, backref="prefeitura")

@@ -21,8 +21,6 @@ class Motorista(Funcionario):
   idFuncionario = db.Column(db.Integer ,db.ForeignKey("funcionario.idPessoa"), primary_key=True)
   idVeiculo = db.Column(db.Integer, db.ForeignKey("veiculo.id"))
 
-  rota = db.relationship("Rota", uselist=False, backref="motorista")
-
   __mapper_args__ = {"polymorphic_identity": "motorista"}
 
   def __init__(self, nome, nascimento, email, telefone, senha, idEndereco, cargo, idVeiculo):

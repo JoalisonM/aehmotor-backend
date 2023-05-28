@@ -13,6 +13,7 @@ from model.pessoa import *
 from model.prefeitura import *
 from model.rota import *
 from model.uf import *
+from model.veiculo import *
 from helpers.database import db
 # from helpers.base_logger import logger
 

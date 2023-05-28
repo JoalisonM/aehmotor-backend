@@ -10,14 +10,14 @@ veiculo_fields={
 }
 
 class Veiculo(db.Model):
-  id = db.Colum(db.Integer,primary_key=True)
+  id = db.Column(db.Integer, primary_key=True)
   cidade = db.Column(db.String, nullable=False)
-  qtdPassageiros = db.Colum(db.Integer,nullable=False)
+  qtdPassageiros = db.Column(db.Integer, nullable=False)
   tipoVeiculo = db.Column(db.String, nullable=False)
-  placa = db.Colum(db.String,nullable=False)
+  placa = db.Column(db.String, nullable=False)
 
-  rota = db.relationship("Rota", useList=False, backref="veiculo")
-  motorista = db.relationship("Motorista", useList=False, backref="veiculo")
+  rota = db.relationship("Rota", uselist=False, backref="veiculo")
+  motorista = db.relationship("Motorista", uselist=False, backref="veiculo")
 
   def __init__(self, cidade, qtdPassageiros, tipoVeiculo, placa):
     self.cidade=cidade

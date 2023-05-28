@@ -12,7 +12,7 @@ class Passageiro(db.Model):
   __tablename__ = "passageiro"
 
   id = db.Column(db.Integer, primary_key=True)
-  idAluno = db.Column(db.Integer, db.ForeignKey('aluno.id'))
+  idAluno = db.Column(db.Integer, db.ForeignKey('aluno.idPessoa'))
   cidadeOrigem = db.Column(db.String, nullable=False)
   cidadeDestino = db.Column(db.String, nullable=False)
 
