@@ -8,11 +8,13 @@ uf_fields = {
   'sigla': fields.String,
 }
 
-
 class Uf(db.Model):
+  __tablename__ = "uf"
+
   id = db.Column(db.Integer, primary_key=True)
   nome = db.Column(db.String, nullable=False)
   sigla = db.Column(db.String, nullable=False)
+
   cidade = db.relationship("Cidade", uselist=False, backref="uf")
 
   def __init__(self, nome, sigla):

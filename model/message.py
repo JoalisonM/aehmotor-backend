@@ -1,7 +1,7 @@
 from flask_restful import fields
 
 message_fields = {
-  'cod': fields.String,
+  'cod': fields.Integer,
   'description': fields.String,
 }
 
