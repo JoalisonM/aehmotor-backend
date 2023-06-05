@@ -11,11 +11,12 @@ parser.add_argument('nome', type=str, help='Problema no nome', required=True)
 parser.add_argument('sigla', type=str, help='Problema na sigla', required=True)
 parser.add_argument('idUf', type=int, help='Problema no id da UF', required=True)
 
-class Cidade(Resource):
+
+class Cidades(Resource):
     def get(self):
         logger.info("Cidades listadas com sucesso!")
-        cidade = Cidade.query.all()
-        return marshal(cidade, cidade_fields), 200
+        cidades = Cidade.query.all()
+        return marshal(cidades, cidade_fields), 200
     
     def post(self):
         args = parser.parse_args()
@@ -23,6 +24,7 @@ class Cidade(Resource):
             nome = args["nome"]
             sigla = args["sigla"]
             idUf = args["idUf"]
+            
             
             cidade = Cidade(nome, sigla, idUf)
             
@@ -36,7 +38,7 @@ class Cidade(Resource):
             logger.error(f"error: {e}")
             
             message = Message("Erro ao cadastradar cidade", 2)
-            return marshal(cidade, cidade_fields), 404
+            return marshal(message, message_fields), 404
         
 class CidadeById(Resource):
     def get(self, id):
@@ -59,7 +61,7 @@ class CidadeById(Resource):
             if cidade is None:
                 logger.error(f"Cidade {id} não encontrada")
                 message = Message(f"Cidade {id} não encontrada", 1)
-                return marshal(cidade, cidade_fields)
+                return marshal(message, message_fields)
             
             cidade.nome = args["nome"]
             cidade.sigla = args["sigla"]

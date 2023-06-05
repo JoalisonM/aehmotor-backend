@@ -1,3 +1,4 @@
+
 from flask_restful import Resource, reqparse, marshal
 
 from model.pessoa import *

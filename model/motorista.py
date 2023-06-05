@@ -1,6 +1,8 @@
 from flask_restful import fields
 from helpers.database import db
 from model.funcionario import Funcionario
+from model.endereco import Endereco
+
 
 
 motorista_fields = {

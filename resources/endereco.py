@@ -5,20 +5,22 @@ from model.uf import *
 from model.message import *
 from helpers.base_logger import logger
 
-parser = reqparse.RequestPaser()
-parser.add_argument('cep', type=str,
-help= 'Problema no cep', required=True)
+parser = reqparse.RequestParser()
+parser.add_argument('cep', type=str, help= 'Problema no cep', required=True)
 parser.add_argument('numero', type=int, help='Problema no número', required=True)
 parser.add_argument('complemento', type=str, help='Problema no complemento', required=True)
 parser.add_argument('referencia', type=str, help='Problema na referência', required=True)
 parser.add_argument('logradouro', type=str, help='Problema no logradouro', required=True)
+parser.add_argument('idCidade', type=int, help='Problema no id de cidade', required=True)
+parser.add_argument('idPessoa', type=int, help='Problema no id de pessoa', required=True)
 
 
-class Endereco(Resource):
+
+class Enderecos(Resource):
     def get(self):
         logger.info("Endereço listado com sucesso!")
-        endereco = Endereco.query.all()
-        return marshal(endereco, endereco_fields), 200
+        enderecos = Endereco.query.all()
+        return marshal(enderecos, endereco_fields), 200
     
     def post(self):
         args = parser.parse_args()
@@ -28,8 +30,10 @@ class Endereco(Resource):
             complemento = args["complemento"]
             referencia = args["referencia"]
             logradouro = args["logradouro"]
+            idCidade = args["idCidade"]
+            idPessoa = args["idPessoa"]
             
-            endereco = Endereco(cep, numero, complemento, referencia, logradouro)
+            endereco = Endereco(cep, numero, complemento, referencia, logradouro,idCidade,idPessoa)
             
             db.session.add(endereco)
             db.session.commit()
@@ -69,8 +73,9 @@ class EnderecoById(Resource):
             endereco.cep = args["cep"]
             endereco.numero = args["numero"]
             endereco.complemento = args["complemento"]
-            endereco.referencia = args["refencia"]
+            endereco.referencia = args["referencia"]
             endereco.logradouro = args["logradouro"]
+            
             
             db.session.add(endereco)
             db.session.commit()

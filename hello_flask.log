@@ -1,2 +1,135 @@
-2023-05-28 20:44:17,214 WARNING _internal _log  * Debugger is active!
-2023-05-28 20:44:17,225 INFO _internal _log  * Debugger PIN: 121-133-082
+2023-06-05 10:34:49,213 INFO _internal _log  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2023-06-05 10:34:53,593 ERROR app log_exception Exception on /api/passageiros [POST]
+Traceback (most recent call last):
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Passageiros.post() missing 1 required positional argument: 'idAluno'
+2023-06-05 10:34:53,611 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:34:53] "[35m[1mPOST /api/passageiros HTTP/1.1[0m" 500 -
+2023-06-05 10:35:02,469 INFO aluno get Alunos listados com sucesso!
+2023-06-05 10:35:02,688 ERROR app log_exception Exception on /api/alunos [GET]
+Traceback (most recent call last):
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\eurid\Documents\Faculdade\aehmotor\aehmotor-backend\resources\aluno.py", line 34, in get
+    alunos = Aluno.query.all()
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\query.py", line 2692, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 1784, in all
+    return self._allrows()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 557, in _allrows
+    rows = self._fetchall_impl()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 1691, in _fetchall_impl
+    return self._real_result._fetchall_impl()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 2291, in _fetchall_impl
+    return list(self.iterator)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\loading.py", line 191, in chunks
+    fetch = cursor._raw_all_rows()
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 548, in _raw_all_rows
+    rows = self._fetchall_impl()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 2108, in _fetchall_impl
+    return self.cursor_strategy.fetchall(self, self.cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1144, in fetchall
+    self.handle_exception(result, dbapi_cursor, e)
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1085, in handle_exception
+    result.connection._handle_dbapi_exception(
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 2347, in _handle_dbapi_exception
+    raise exc_info[1].with_traceback(exc_info[2])
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1140, in fetchall
+    rows = dbapi_cursor.fetchall()
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: year 41999 is out of range
+2023-06-05 10:35:02,816 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:35:02] "[35m[1mGET /api/alunos HTTP/1.1[0m" 500 -
+2023-06-05 10:37:23,459 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:37:23] "[31m[1mPUT /api/alunos/17 HTTP/1.1[0m" 400 -
+2023-06-05 10:37:56,422 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:37:56] "[31m[1mPUT /api/alunos/17 HTTP/1.1[0m" 400 -
+2023-06-05 10:47:48,263 INFO aluno get Alunos listados com sucesso!
+2023-06-05 10:47:48,267 ERROR app log_exception Exception on /api/alunos [GET]
+Traceback (most recent call last):
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 489, in wrapper
+    resp = resource(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\views.py", line 107, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 604, in dispatch_request
+    resp = meth(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\eurid\Documents\Faculdade\aehmotor\aehmotor-backend\resources\aluno.py", line 34, in get
+    alunos = Aluno.query.all()
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\query.py", line 2692, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 1784, in all
+    return self._allrows()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 557, in _allrows
+    rows = self._fetchall_impl()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 1691, in _fetchall_impl
+    return self._real_result._fetchall_impl()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 2291, in _fetchall_impl
+    return list(self.iterator)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\loading.py", line 191, in chunks
+    fetch = cursor._raw_all_rows()
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 548, in _raw_all_rows
+    rows = self._fetchall_impl()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 2108, in _fetchall_impl
+    return self.cursor_strategy.fetchall(self, self.cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1144, in fetchall
+    self.handle_exception(result, dbapi_cursor, e)
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1085, in handle_exception
+    result.connection._handle_dbapi_exception(
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 2347, in _handle_dbapi_exception
+    raise exc_info[1].with_traceback(exc_info[2])
+  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1140, in fetchall
+    rows = dbapi_cursor.fetchall()
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: year 41999 is out of range
+2023-06-05 10:47:48,291 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:47:48] "[35m[1mGET /api/alunos HTTP/1.1[0m" 500 -
+2023-06-05 10:51:47,397 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:51:47] "[31m[1mPUT /api/alunos/13 HTTP/1.1[0m" 400 -
