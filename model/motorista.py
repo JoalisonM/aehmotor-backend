@@ -11,7 +11,6 @@ motorista_fields = {
   'nascimento': fields.String,
   'email': fields.String,
   'telefone': fields.String,
-  'idEndereco': fields.Integer,
   'senha' : fields.String,
   'cargo':fields.String,
   'idVeiculo' : fields.Integer,
@@ -20,15 +19,13 @@ motorista_fields = {
 class Motorista(Funcionario):
   __tablename__ = "motorista"
 
-  idFuncionario = db.Column(db.Integer ,db.ForeignKey("funcionario.idPessoa"), primary_key=True)
-  idVeiculo = db.Column(db.Integer, db.ForeignKey("veiculo.id"))
-  
-  __mapper_args__ = {
-    "polymorphic_identity": "motorista"
-  }
+  id_funcionario = db.Column(db.Integer ,db.ForeignKey("funcionario.id_pessoa"), primary_key=True)
+  id_veiculo = db.Column(db.Integer, db.ForeignKey("veiculo.id"))
+
+  __mapper_args__ = {"polymorphic_identity": "motorista"}
 
   def __init__(self, nome, nascimento, email, telefone, senha, cargo, idVeiculo):
-    super().__init__(nome, nascimento, email, telefone, senha, cargo )
+    super().__init__(nome, nascimento, email, telefone, senha, cargo)
     self.idVeiculo = idVeiculo
 
   def __repr__(self):

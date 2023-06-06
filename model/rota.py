@@ -18,15 +18,15 @@ class Rota(db.Model):
   __tablename__ = "rota"
 
   id = db.Column(db.Integer, primary_key=True)
-  idMotorista = db.Column(db.Integer, db.ForeignKey('motorista.idFuncionario'))
-  idVeiculo = db.Column(db.Integer, db.ForeignKey('veiculo.id'))
-  idInstituicaoEnsino = db.Column(db.Integer, db.ForeignKey('instituicaoEnsino.id'))
-  idPrefeitura = db.Column(db.Integer, db.ForeignKey('prefeitura.id'))
-  cidadeOrigem = db.Column(db.String, nullable=False)
-  cidadeDestino = db.Column(db.String, nullable=False)
-  qdtAlunos = db.Column(db.Integer, nullable=False)
-  horarioSaida = db.Column(db.DateTime, nullable=False)
-  horarioChegada = db.Column(db.DateTime, nullable=False)
+  id_motorista = db.Column(db.Integer, db.ForeignKey('motorista.id_funcionario'))
+  id_veiculo = db.Column(db.Integer, db.ForeignKey('veiculo.id'))
+  id_instituicao_ensino = db.Column(db.Integer, db.ForeignKey('instituicao_ensino.id'))
+  id_prefeitura = db.Column(db.Integer, db.ForeignKey('prefeitura.id'))
+  cidade_origem = db.Column(db.String, nullable=False)
+  cidade_destino = db.Column(db.String, nullable=False)
+  qdt_alunos = db.Column(db.Integer, nullable=False)
+  horario_saida = db.Column(db.DateTime, nullable=False)
+  horario_chegada = db.Column(db.DateTime, nullable=False)
 
   def __init__(self, cidadeOrigem, cidadeDestino, idMotorista, qdtAlunos, idVeiculo, horarioSaida, horarioChegada, idPrefeitura, idInstituicaoEnsino):
       self.cidadeOrigem=cidadeOrigem

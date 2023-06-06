@@ -16,7 +16,7 @@ class Funcionario(Pessoa):
   
   __tablename__ = "funcionario"
 
-  idPessoa = db.Column(db.Integer ,db.ForeignKey("pessoa.id"), primary_key=True)
+  id_pessoa = db.Column(db.Integer ,db.ForeignKey("pessoa.id"), primary_key=True)
   cargo = db.Column(db.String, nullable=False)
 
   prefeitura = db.relationship("Prefeitura", uselist=False, backref="funcionario")
