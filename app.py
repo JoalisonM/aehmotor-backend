@@ -5,12 +5,16 @@ from helpers.cors import cors
 from helpers.database import db, migrate
 from resources.motorista import Motoristas, MotoristaById
 from resources.veiculo import Veiculos, VeiculoById
-from resources.funcionario import Funcionarios, FuncionarioById
 from resources.passageiro import Passageiros, PassageiroById
 from resources.cidade import Cidades,CidadeById
 from resources.endereco import Enderecos, EnderecoById
 from resources.aluno import Alunos, AlunoById
 from resources.pessoa import Pessoas, PessoaById
+from resources.uf import Ufs, UfById
+from resources.instituicaoEnsino import InstituicoesDeEnsino, InstituicaoDeEnsinoById
+from resources.funcionario import Funcionarios, FuncionarioById
+from resources.rota import Rotas, RotaById
+from resources.prefeitura import Prefeituras, PrefeituraById
 
 # create the app
 app = Flask(__name__)
@@ -33,8 +37,6 @@ api.add_resource(Motoristas,'/motoristas')
 api.add_resource(MotoristaById,'/motoristas/<int:id>')
 api.add_resource(Veiculos,'/veiculos')
 api.add_resource(VeiculoById,'/veiculos/<int:id>')
-api.add_resource(Funcionarios,'/funcionarios')
-api.add_resource(FuncionarioById,'/funcionarios/<int:id>')
 api.add_resource(Passageiros, '/passageiros')
 api.add_resource(PassageiroById,'/passageiros/<int:id>')
 api.add_resource(Alunos, '/alunos')
@@ -45,7 +47,16 @@ api.add_resource(Cidades,'/cidades')
 api.add_resource(CidadeById,'/cidades/<int:id>')
 api.add_resource(Enderecos,'/enderecos')
 api.add_resource(EnderecoById,'/enderecos/<int:id>')
-
+api.add_resource(Ufs, '/ufs')
+api.add_resource(UfById, '/ufs/<int:id>')
+api.add_resource(InstituicoesDeEnsino, '/instituicoesDeEnsino')
+api.add_resource(InstituicaoDeEnsinoById, 'instituicoesDeEnsino/<int:id>')
+api.add_resource(Funcionarios, '/funcionarios')
+api.add_resource(FuncionarioById, '/funcionarios/<int:id>')
+api.add_resource(Rotas, '/rotas')
+api.add_resource(RotaById, '/rotas/<int:id>')
+api.add_resource(Prefeituras, '/prefeituras')
+api.add_resource(PrefeituraById, '/prefeituras/<int:id>')
 
 # Blueprints para Restful
 app.register_blueprint(api_bp)

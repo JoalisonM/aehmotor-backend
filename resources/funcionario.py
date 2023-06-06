@@ -7,10 +7,10 @@ from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
 parser.add_argument('nome', type=str, help='Problema no nome', required=True)
-parser.add_argument('email', type=str, help='Problema no email', required=True)
 parser.add_argument('nascimento', type=str, help='Problema no nascimento', required=True)
+parser.add_argument('email', type=str, help='Problema no email', required=True)
 parser.add_argument('telefone', type=str, help='Problema no telefone', required=True)
-parser.add_argument('senha', type=str, help='Problema na senha', required=True)
+parser.add_argument('senha', type=str, help='Problema no senha', required=True)
 parser.add_argument('cargo', type=str, help='Problema no cargo', required=True)
 
 
@@ -25,18 +25,18 @@ class Funcionarios(Resource):
         args = parser.parse_args()
         try:
             nome = args["nome"]
-            email = args["email"]
             nascimento = args["nascimento"]
+            email = args["email"]
             telefone = args["telefone"]
             senha = args["senha"]
             cargo = args["cargo"]
 
-            funcionario = Funcionario(nome, email, nascimento, telefone, senha,cargo)
+            funcionario = Funcionario(nome, nascimento, email, telefone, senha, cargo)
 
             db.session.add(funcionario)
             db.session.commit()
 
-            logger.info("Funcionário cadastrado com sucesso!")
+            logger.info("Funcionário cadastrada com sucesso!")
 
             return marshal(funcionario, funcionario_fields), 201
         except Exception as e:
@@ -84,7 +84,7 @@ class FuncionarioById(Resource):
         except Exception as e:
             logger.error(f"error: {e}")
 
-            message = Message("Erro ao atualizar funcionario", 2)
+            message = Message("Erro ao atualizar funcionário", 2)
             return marshal(message, message_fields), 404
 
     def delete(self, id):
