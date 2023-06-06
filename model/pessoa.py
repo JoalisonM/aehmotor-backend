@@ -8,6 +8,7 @@ pessoa_fields = {
   'email': fields.String,
   'telefone': fields.String,
   'senha': fields.String,
+  'tipo': fields.String,
 }
 
 class Pessoa(db.Model):

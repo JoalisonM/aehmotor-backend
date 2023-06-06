@@ -18,12 +18,12 @@ aluno_fields = {
 class Aluno(Pessoa):
   __tablename__ = "aluno"
 
-  idPessoa = db.Column(db.Integer ,db.ForeignKey("pessoa.id"), primary_key=True)
+  id_pessoa = db.Column(db.Integer ,db.ForeignKey("pessoa.id"), primary_key=True)
   matricula = db.Column(db.String, unique=True, nullable=True)
   curso = db.Column(db.String, nullable=True)
   turno = db.Column(db.String, nullable=True)
-  idInstituicaoEnsino =  db.Column(
-    db.Integer, db.ForeignKey('instituicaoEnsino.id'), nullable=True
+  id_instituicao_ensino =  db.Column(
+    db.Integer, db.ForeignKey('instituicao_ensino.id'), nullable=True
   )
 
   passageiro = db.relationship("Passageiro", uselist=False, backref="aluno")

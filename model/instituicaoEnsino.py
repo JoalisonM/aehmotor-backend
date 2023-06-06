@@ -11,15 +11,15 @@ instituicaoEnsino_fields = {
 
 
 class InstituicaoEnsino(db.Model):
-  __tablename__ = "instituicaoEnsino"
+  __tablename__ = "instituicao_ensino"
 
   id = db.Column(db.Integer, primary_key=True)
   nome = db.Column(db.String, nullable=False)
   telefone = db.Column(db.String, nullable=False)
-  idEndereco = db.Column(db.Integer, db.ForeignKey('endereco.id'))
+  id_endereco = db.Column(db.Integer, db.ForeignKey('endereco.id'))
 
-  rota = db.relationship("Rota", uselist=False, backref="instituicaoEnsino")
-  aluno = db.relationship("Aluno", uselist=False, backref="instituicaoEnsino")
+  rota = db.relationship("Rota", uselist=False, backref="instituicao_ensino")
+  aluno = db.relationship("Aluno", uselist=False, backref="instituicao_ensino")
 
   def __init__(self, nome, telefone, idEndereco):
     super().__init__()

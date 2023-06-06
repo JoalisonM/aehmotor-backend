@@ -12,8 +12,8 @@ veiculo_fields={
 class Veiculo(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   cidade = db.Column(db.String, nullable=False)
-  qtdPassageiros = db.Column(db.Integer, nullable=False)
-  tipoVeiculo = db.Column(db.String, nullable=False)
+  qtd_passageiros = db.Column(db.Integer, nullable=False)
+  tipo_veiculo = db.Column(db.String, nullable=False)
   placa = db.Column(db.String, nullable=False)
 
   rota = db.relationship("Rota", uselist=False, backref="veiculo")
