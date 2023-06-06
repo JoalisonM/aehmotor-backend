@@ -53,7 +53,7 @@ class EnderecoById(Resource):
         if endereco is None: 
             logger.error(f"Endereço {id} não encontrado")
             
-            message = Message(f"Enderço {id} não encontrado", 1)
+            message = Message(f"Endereço {id} não encontrado", 1)
             return marshal(message), 404
 
         logger.info(f"Endereço {id} encontrado com sucesso!")

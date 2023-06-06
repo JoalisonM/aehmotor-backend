@@ -3,6 +3,8 @@ from flask import Flask, Blueprint
 
 from helpers.cors import cors
 from helpers.database import db, migrate
+from resources.motorista import Motoristas, MotoristaById
+from resources.veiculo import Veiculos, VeiculoById
 from resources.funcionario import Funcionarios, FuncionarioById
 from resources.passageiro import Passageiros, PassageiroById
 from resources.cidade import Cidades,CidadeById
@@ -26,6 +28,11 @@ db.init_app(app)
 cors.init_app(app)
 migrate.init_app(app, db)
 
+
+api.add_resource(Motoristas,'/motoristas')
+api.add_resource(MotoristaById,'/motoristas/<int:id>')
+api.add_resource(Veiculos,'/veiculos')
+api.add_resource(VeiculoById,'/veiculos/<int:id>')
 api.add_resource(Funcionarios,'/funcionarios')
 api.add_resource(FuncionarioById,'/funcionarios/<int:id>')
 api.add_resource(Passageiros, '/passageiros')

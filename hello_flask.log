@@ -1,135 +1,26 @@
-2023-06-05 10:34:49,213 INFO _internal _log  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
-2023-06-05 10:34:53,593 ERROR app log_exception Exception on /api/passageiros [POST]
-Traceback (most recent call last):
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 489, in wrapper
-    resp = resource(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\views.py", line 107, in view
-    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 604, in dispatch_request
-    resp = meth(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-TypeError: Passageiros.post() missing 1 required positional argument: 'idAluno'
-2023-06-05 10:34:53,611 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:34:53] "[35m[1mPOST /api/passageiros HTTP/1.1[0m" 500 -
-2023-06-05 10:35:02,469 INFO aluno get Alunos listados com sucesso!
-2023-06-05 10:35:02,688 ERROR app log_exception Exception on /api/alunos [GET]
-Traceback (most recent call last):
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 489, in wrapper
-    resp = resource(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\views.py", line 107, in view
-    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 604, in dispatch_request
-    resp = meth(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\eurid\Documents\Faculdade\aehmotor\aehmotor-backend\resources\aluno.py", line 34, in get
-    alunos = Aluno.query.all()
-             ^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\query.py", line 2692, in all
-    return self._iter().all()  # type: ignore
-           ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 1784, in all
-    return self._allrows()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 557, in _allrows
-    rows = self._fetchall_impl()
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 1691, in _fetchall_impl
-    return self._real_result._fetchall_impl()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 2291, in _fetchall_impl
-    return list(self.iterator)
-           ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\loading.py", line 191, in chunks
-    fetch = cursor._raw_all_rows()
-            ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 548, in _raw_all_rows
-    rows = self._fetchall_impl()
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 2108, in _fetchall_impl
-    return self.cursor_strategy.fetchall(self, self.cursor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1144, in fetchall
-    self.handle_exception(result, dbapi_cursor, e)
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1085, in handle_exception
-    result.connection._handle_dbapi_exception(
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 2347, in _handle_dbapi_exception
-    raise exc_info[1].with_traceback(exc_info[2])
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1140, in fetchall
-    rows = dbapi_cursor.fetchall()
-           ^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: year 41999 is out of range
-2023-06-05 10:35:02,816 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:35:02] "[35m[1mGET /api/alunos HTTP/1.1[0m" 500 -
-2023-06-05 10:37:23,459 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:37:23] "[31m[1mPUT /api/alunos/17 HTTP/1.1[0m" 400 -
-2023-06-05 10:37:56,422 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:37:56] "[31m[1mPUT /api/alunos/17 HTTP/1.1[0m" 400 -
-2023-06-05 10:47:48,263 INFO aluno get Alunos listados com sucesso!
-2023-06-05 10:47:48,267 ERROR app log_exception Exception on /api/alunos [GET]
-Traceback (most recent call last):
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1796, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 489, in wrapper
-    resp = resource(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\views.py", line 107, in view
-    return current_app.ensure_sync(self.dispatch_request)(**kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_restful\__init__.py", line 604, in dispatch_request
-    resp = meth(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\eurid\Documents\Faculdade\aehmotor\aehmotor-backend\resources\aluno.py", line 34, in get
-    alunos = Aluno.query.all()
-             ^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\query.py", line 2692, in all
-    return self._iter().all()  # type: ignore
-           ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 1784, in all
-    return self._allrows()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 557, in _allrows
-    rows = self._fetchall_impl()
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 1691, in _fetchall_impl
-    return self._real_result._fetchall_impl()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 2291, in _fetchall_impl
-    return list(self.iterator)
-           ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\loading.py", line 191, in chunks
-    fetch = cursor._raw_all_rows()
-            ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\result.py", line 548, in _raw_all_rows
-    rows = self._fetchall_impl()
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 2108, in _fetchall_impl
-    return self.cursor_strategy.fetchall(self, self.cursor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1144, in fetchall
-    self.handle_exception(result, dbapi_cursor, e)
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1085, in handle_exception
-    result.connection._handle_dbapi_exception(
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 2347, in _handle_dbapi_exception
-    raise exc_info[1].with_traceback(exc_info[2])
-  File "C:\Users\eurid\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\cursor.py", line 1140, in fetchall
-    rows = dbapi_cursor.fetchall()
-           ^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: year 41999 is out of range
-2023-06-05 10:47:48,291 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:47:48] "[35m[1mGET /api/alunos HTTP/1.1[0m" 500 -
-2023-06-05 10:51:47,397 INFO _internal _log 127.0.0.1 - - [05/Jun/2023 10:51:47] "[31m[1mPUT /api/alunos/13 HTTP/1.1[0m" 400 -
+2023-06-06 01:53:36,585 INFO _internal _log  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2023-06-06 01:53:40,250 INFO motorista get Motoristas listados com sucesso!
+2023-06-06 01:53:40,477 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:53:40] "GET /api/motoristas HTTP/1.1" 200 -
+2023-06-06 01:54:13,674 ERROR motorista post error: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "pessoa_email_key"
+DETAIL:  Key (email)=(joalison@gmail.com) already exists.
+
+[SQL: INSERT INTO pessoa (nome, email, nascimento, telefone, senha, tipo) VALUES (%(nome)s, %(email)s, %(nascimento)s, %(telefone)s, %(senha)s, %(tipo)s) RETURNING pessoa.id]
+[parameters: {'nome': 'Joalison', 'email': 'joalison@gmail.com', 'nascimento': '2001-04-13', 'telefone': '8398848285', 'senha': 'joaj', 'tipo': 'motorista'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2023-06-06 01:54:13,677 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:54:13] "[33mPOST /api/motoristas HTTP/1.1[0m" 404 -
+2023-06-06 01:54:45,990 INFO motorista post Motorista cadastrado com sucesso!
+2023-06-06 01:54:45,999 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:54:45] "[35m[1mPOST /api/motoristas HTTP/1.1[0m" 201 -
+2023-06-06 01:55:16,793 INFO motorista get Motoristas listados com sucesso!
+2023-06-06 01:55:16,798 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:55:16] "GET /api/motoristas HTTP/1.1" 200 -
+2023-06-06 01:55:28,745 INFO motorista get Motorista 42 encontrado com sucesso!
+2023-06-06 01:55:28,747 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:55:28] "GET /api/motoristas/42 HTTP/1.1" 200 -
+2023-06-06 01:55:40,864 INFO motorista get Motorista 42 encontrado com sucesso!
+2023-06-06 01:55:40,866 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:55:40] "GET /api/motoristas/42 HTTP/1.1" 200 -
+2023-06-06 01:55:52,763 INFO motorista get Motorista 42 encontrado com sucesso!
+2023-06-06 01:55:52,764 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:55:52] "GET /api/motoristas/42 HTTP/1.1" 200 -
+2023-06-06 01:56:34,516 INFO motorista put Motorista cadastrado com sucesso!
+2023-06-06 01:56:34,521 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:56:34] "PUT /api/motoristas/42 HTTP/1.1" 200 -
+2023-06-06 01:56:47,627 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:56:47] "DELETE /api/motoristas/42 HTTP/1.1" 200 -
+2023-06-06 01:56:52,886 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:56:52] "[33mGET /api/motoristas/ HTTP/1.1[0m" 404 -
+2023-06-06 01:57:05,129 INFO motorista get Motoristas listados com sucesso!
+2023-06-06 01:57:05,156 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:57:05] "GET /api/motoristas HTTP/1.1" 200 -

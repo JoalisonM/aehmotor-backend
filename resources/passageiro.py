@@ -1,13 +1,13 @@
 from flask_restful import Resource, reqparse, marshal
 
-from model.aluno import*
+
 from model.passageiro import*
 from model.pessoa import*
 from model.message import *
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
-parser.add_argument('idAluno', type=int, help= 'Problema no id de aluno', required=True)
+parser.add_argument('idAluno', type=int, help= 'Problema no id aluno', required=True)
 parser.add_argument('cidadeOrigem', type=str, help='Problema no campo cidade de origem', required=True)
 parser.add_argument('cidadeDestino', type=str, help='Problema no campo  cidade de destino', required=True)
 
@@ -17,7 +17,7 @@ class Passageiros(Resource):
         passageiros = Passageiro.query.all()
         return marshal(passageiros, passageiro_fields), 200
     
-    def post(self,idAluno):
+    def post(self):
         args = parser.parse_args()
         try:
             idAluno = args["idAluno"]
@@ -62,7 +62,7 @@ class PassageiroById(Resource):
                 message = Message(f"Passageiro {id} não encontrado", 1)
                 return marshal(message, message_fields)
             
-            passageiro.id = args["id"]
+            passageiro.idAluno = args["idAluno"]
             passageiro.cidadeOrigem = args["cidadeOrigem"]
             passageiro.cidadeDestino = args["cidadeDestino"]
             

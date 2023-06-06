@@ -8,6 +8,7 @@ pessoa_fields = {
   'email': fields.String,
   'telefone': fields.String,
   'senha': fields.String,
+  'tipo':fields.String
 }
 
 class Pessoa(db.Model):
@@ -25,7 +26,7 @@ class Pessoa(db.Model):
 
   __mapper_args__ = {
     "polymorphic_identity": "pessoa",
-    "polymorphic_on": tipo
+    "polymorphic_on":tipo
   }
 
   def __init__(self, nome, email, nascimento, telefone, senha):
