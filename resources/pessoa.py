@@ -1,3 +1,4 @@
+
 from flask_restful import Resource, reqparse, marshal
 
 from model.pessoa import *
@@ -38,7 +39,7 @@ class Pessoas(Resource):
         except Exception as e:
             logger.error(f"error: {e}")
 
-            message = Message("Error ao cadastrar pessoa", 2)
+            message = Message("Erro ao cadastrar pessoa", 2)
             return marshal(message, message_fields), 404
 
 class PessoaById(Resource):
@@ -79,7 +80,7 @@ class PessoaById(Resource):
         except Exception as e:
             logger.error(f"error: {e}")
 
-            message = Message("Error ao atualizar pessoa", 2)
+            message = Message("Erro ao atualizar pessoa", 2)
             return marshal(message, message_fields), 404
 
     def delete(self, id):

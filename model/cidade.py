@@ -6,6 +6,7 @@ cidade_fields = {
   'id': fields.Integer,
   'nome': fields.String,
   'sigla': fields.String,
+  'idUf':fields.Integer,
 }
 
 class Cidade(db.Model):

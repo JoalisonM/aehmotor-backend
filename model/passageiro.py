@@ -2,7 +2,7 @@ from flask_restful import fields
 from helpers.database import db
 
 passageiro_fields = {
-  'id': fields.String,
+  'id': fields.Integer,
   'idAluno': fields.Integer,
   'cidadeOrigem': fields.String,
   'cidadeDestino' : fields.String,
