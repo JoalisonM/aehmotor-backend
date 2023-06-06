@@ -13,6 +13,7 @@ funcionario_fields = {
 }
 
 class Funcionario(Pessoa):
+  
   __tablename__ = "funcionario"
 
   idPessoa = db.Column(db.Integer ,db.ForeignKey("pessoa.id"), primary_key=True)
@@ -21,8 +22,7 @@ class Funcionario(Pessoa):
   prefeitura = db.relationship("Prefeitura", uselist=False, backref="funcionario")
 
   __mapper_args__ = {
-    "polymorphic_identity": "funcionario",
-    "polymorphic_on": cargo
+    "polymorphic_identity": "funcionario"
   }
 
   def __init__(self, nome, email, nascimento, telefone, senha, cargo):

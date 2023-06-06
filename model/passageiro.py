@@ -2,7 +2,7 @@ from flask_restful import fields
 from helpers.database import db
 
 passageiro_fields = {
-  'id': fields.String,
+  'id': fields.Integer,
   'idAluno': fields.Integer,
   'cidadeOrigem': fields.String,
   'cidadeDestino' : fields.String,
@@ -12,7 +12,7 @@ class Passageiro(db.Model):
   __tablename__ = "passageiro"
 
   id = db.Column(db.Integer, primary_key=True)
-  idAluno = db.Column(db.Integer, db.ForeignKey('aluno.idPessoa'))
+  idAluno = db.Column(db.Integer, db.ForeignKey('aluno.idPessoa'),unique=True)
   cidadeOrigem = db.Column(db.String, nullable=False)
   cidadeDestino = db.Column(db.String, nullable=False)
 

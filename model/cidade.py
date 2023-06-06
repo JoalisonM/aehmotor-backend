@@ -6,6 +6,7 @@ cidade_fields = {
   'id': fields.Integer,
   'nome': fields.String,
   'sigla': fields.String,
+  'idUf':fields.Integer,
 }
 
 class Cidade(db.Model):
@@ -15,7 +16,6 @@ class Cidade(db.Model):
   nome = db.Column(db.String, nullable=False)
   sigla = db.Column(db.String, nullable=False)
   idUf = db.Column(db.Integer, db.ForeignKey('uf.id'))
-
   endereco = db.relationship("Endereco", uselist=False, backref="cidade")
 
   def __init__(self, nome, sigla, idUf):

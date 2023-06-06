@@ -23,7 +23,7 @@ class Aluno(Pessoa):
   curso = db.Column(db.String, nullable=True)
   turno = db.Column(db.String, nullable=True)
   idInstituicaoEnsino =  db.Column(
-    db.Integer, db.ForeignKey('instituicaoEnsino.id'), nullable=True
+  db.Integer, db.ForeignKey('instituicaoEnsino.id'), nullable=True
   )
 
   passageiro = db.relationship("Passageiro", uselist=False, backref="aluno")

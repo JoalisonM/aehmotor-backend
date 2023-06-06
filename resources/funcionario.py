@@ -1,19 +1,8 @@
 from flask_restful import Resource, reqparse, marshal
 
-from model.aluno import *
-from model.instituicaoEnsino import *
-from model.endereco import *
-from model.cidade import *
-from model.uf import *
-from model.prefeitura import *
 from model.funcionario import *
-from model.passageiro import *
-from model.motorista import *
 from model.pessoa import *
-from model.veiculo import *
-from model.rota import *
 from model.message import *
-from helpers.database import db
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
@@ -53,7 +42,7 @@ class Funcionarios(Resource):
         except Exception as e:
             logger.error(f"error: {e}")
 
-            message = Message("Error ao cadastrar o Funcionário", 2)
+            message = Message("Erro ao cadastrar funcionário", 2)
             return marshal(message, message_fields), 404
 
 class FuncionarioById(Resource):
@@ -61,12 +50,12 @@ class FuncionarioById(Resource):
         funcionario = Funcionario.query.get(id)
 
         if funcionario is None:
-            logger.error(f"Funcionario {id} não encontrado")
+            logger.error(f"Funcionário {id} não encontrado")
 
-            message = Message(f"Funcionario {id} não encontrado", 1)
+            message = Message(f"Funcionário {id} não encontrado", 1)
             return marshal(message), 404
 
-        logger.info(f"Funcionario {id} encontrado com sucesso!")
+        logger.info(f"Funcionário {id} encontrado com sucesso!")
         return marshal(funcionario, funcionario_fields)
 
     def put(self, id):
@@ -76,39 +65,38 @@ class FuncionarioById(Resource):
             funcionario = Funcionario.query.get(id)
 
             if funcionario is None:
-                logger.error(f"Funcionario {id} não encontrado")
-                message = Message(f"Funcionario {id} não encontrado", 1)
+                logger.error(f"Funcionário {id} não encontrado")
+                message = Message(f"Funcionário {id} não encontrado", 1)
                 return marshal(message, message_fields)
 
             funcionario.nome = args["nome"]
-            funcionario.nascimento = args["nascimento"]
             funcionario.email = args["email"]
+            funcionario.nascimento = args["nascimento"]
             funcionario.telefone = args["telefone"]
             funcionario.senha = args["senha"]
             funcionario.cargo = args["cargo"]
 
-
             db.session.add(funcionario)
             db.session.commit()
 
-            logger.info("Funcionario cadastrado com sucesso!")
+            logger.info("Funcionário cadastrado com sucesso!")
             return marshal(funcionario, funcionario_fields), 200
         except Exception as e:
             logger.error(f"error: {e}")
 
-            message = Message("Error ao atualizar o Funcionário", 2)
+            message = Message("Erro ao atualizar funcionário", 2)
             return marshal(message, message_fields), 404
 
     def delete(self, id):
         funcionario = Funcionario.query.get(id)
 
         if funcionario is None:
-            logger.error(f"Funcionario {id} não encontrado")
-            message = Message(f"Funcionario {id} não encontrado", 1)
+            logger.error(f"Funcionário {id} não encontrado")
+            message = Message(f"Funcionário {id} não encontrado", 1)
             return marshal(message, message_fields)
 
         db.session.delete(funcionario)
         db.session.commit()
 
-        message = Message("Funcionario deletado com sucesso!", 3)
+        message = Message("Funcionário deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
