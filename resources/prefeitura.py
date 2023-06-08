@@ -18,7 +18,8 @@ from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
 parser.add_argument('secretario', type=str, help='Problema no id do secretario', required=True)
-parser.add_argument('idEndereco', type=str, help='Problema no telefone', required=True)
+parser.add_argument('id_endereco', type=str, help='Problema no telefone', required=True)
+parser.add_argument('nome', type=str, help='Problema no nome', required=True)
 
 
 class Prefeituras(Resource):
@@ -30,10 +31,11 @@ class Prefeituras(Resource):
     def post(self):
         args = parser.parse_args()
         try:
+            nome = args["nome"]
             secretario = args["secretario"]
-            idEndereco = args["idEndereco"]
+            id_endereco = args["id_endereco"]
 
-            prefeitura = Prefeitura(secretario, idEndereco)
+            prefeitura = Prefeitura(secretario, id_endereco)
 
             db.session.add(prefeitura)
             db.session.commit()
@@ -71,8 +73,9 @@ class PrefeituraById(Resource):
                 message = Message(f"Prefeitura {id} não encontrado", 1)
                 return marshal(message, message_fields)
 
+            prefeitura.nome = args["nome"]
             prefeitura.secretario = args["secretario"]
-            prefeitura.idEndereco = args["idEndereco"]
+            prefeitura.id_endereco = args["id_endereco"]
 
             db.session.add(prefeitura)
             db.session.commit()

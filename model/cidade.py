@@ -3,10 +3,15 @@ from flask_restful import fields
 from helpers.database import db
 
 cidade_fields = {
-  'id': fields.Integer,
+  'codigo_ibge': fields.Integer,
   'nome': fields.String,
-  'sigla': fields.String,
-  'idUf':fields.Integer,
+  'latitude': fields.Float,
+  'longitude':fields.Float,
+  'capital':fields.Boolean,
+  'codigo_uf':fields.Integer,
+  'siafi_id':fields.String,
+  'ddd':fields.Integer,
+  'fuso_horario':fields.String,
 }
 
 class Cidade(db.Model):

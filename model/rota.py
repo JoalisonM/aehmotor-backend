@@ -3,15 +3,15 @@ from helpers.database import db
 
 rota_fields ={
   'id': fields.Integer,
-  'idVeiculo':fields.Integer,
-  'idMotorista':fields.Integer,
-  'idPrefeitura':fields.String,
-  'idInstituicaoEnsino':fields.Integer,
-  'cidadeOrigem':fields.String,
-  'cidadeDestino':fields.String,
-  'qdtAlunos':fields.Integer,
-  'horarioSaida':fields.DateTime,
-  'horarioChegada':fields.DateTime,
+  'id_veiculo':fields.Integer,
+  'id_motorista':fields.Integer,
+  'id_prefeitura':fields.String,
+  'id_instituicao_ensino':fields.Integer,
+  'cidade_origem':fields.String,
+  'cidade_destino':fields.String,
+  'qtd_alunos':fields.Integer,
+  'horario_saida':fields.String,
+  'horario_hegada':fields.String,
 }
 
 class Rota(db.Model):
@@ -24,20 +24,23 @@ class Rota(db.Model):
   id_prefeitura = db.Column(db.Integer, db.ForeignKey('prefeitura.id'))
   cidade_origem = db.Column(db.String, nullable=False)
   cidade_destino = db.Column(db.String, nullable=False)
-  qdt_alunos = db.Column(db.Integer, nullable=False)
-  horario_saida = db.Column(db.DateTime, nullable=False)
-  horario_chegada = db.Column(db.DateTime, nullable=False)
+  qtd_alunos = db.Column(db.Integer, nullable=False)
+  horario_saida = db.Column(db.Time, nullable=False)
+  horario_chegada = db.Column(db.Time, nullable=False)
 
-  def __init__(self, cidadeOrigem, cidadeDestino, idMotorista, qdtAlunos, idVeiculo, horarioSaida, horarioChegada, idPrefeitura, idInstituicaoEnsino):
-      self.cidadeOrigem=cidadeOrigem
-      self.cidadeDestino=cidadeDestino
-      self.idMotorista=idMotorista
-      self.qdtAlunos=qdtAlunos
-      self.idVeiculo=idVeiculo
-      self.horarioSaida=horarioSaida
-      self.horarioChegada=horarioChegada
-      self.idPrefeitura=idPrefeitura
-      self.idInstituicaoEnsino=idInstituicaoEnsino
+  def __init__(self, id_motorista, id_veiculo, id_instituicao_ensino,
+               id_prefeitura, cidade_origem, cidade_destino, qtd_alunos,
+               horario_saida, horario_chegada
+  ):
+      self.cidade_origem=cidade_origem
+      self.cidade_destino=cidade_destino
+      self.id_motorista=id_motorista
+      self.qtd_alunos=qtd_alunos
+      self.id_veiculo=id_veiculo
+      self.horario_saida=horario_saida
+      self.horario_chegada=horario_chegada
+      self.id_prefeitura=id_prefeitura
+      self.id_instituicao_ensino=id_instituicao_ensino
 
   def __repr__(self):
       return f'<Rota>'

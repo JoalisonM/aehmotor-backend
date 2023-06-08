@@ -31,7 +31,7 @@ class Funcionarios(Resource):
             senha = args["senha"]
             cargo = args["cargo"]
 
-            funcionario = Funcionario(nome, nascimento, email, telefone, senha, cargo)
+            funcionario = Funcionario(nome, email, nascimento, telefone, senha, cargo)
 
             db.session.add(funcionario)
             db.session.commit()

@@ -11,8 +11,8 @@ parser.add_argument('numero', type=int, help='Problema no número', required=Tru
 parser.add_argument('complemento', type=str, help='Problema no complemento', required=True)
 parser.add_argument('referencia', type=str, help='Problema na referência', required=True)
 parser.add_argument('logradouro', type=str, help='Problema no logradouro', required=True)
-parser.add_argument('idCidade', type=int, help='Problema no id de cidade', required=True)
-parser.add_argument('idPessoa', type=int, help='Problema no id de pessoa', required=True)
+parser.add_argument('id_cidade', type=int, help='Problema no id de cidade', required=True)
+parser.add_argument('id_pessoa', type=int, help='Problema no id de pessoa', required=True)
 
 
 
@@ -30,10 +30,10 @@ class Enderecos(Resource):
             complemento = args["complemento"]
             referencia = args["referencia"]
             logradouro = args["logradouro"]
-            idCidade = args["idCidade"]
-            idPessoa = args["idPessoa"]
+            id_cidade = args["id_cidade"]
+            id_pessoa = args["id_pessoa"]
             
-            endereco = Endereco(cep, numero, complemento, referencia, logradouro,idCidade,idPessoa)
+            endereco = Endereco(cep, numero, complemento, referencia, logradouro,id_cidade,id_pessoa)
             
             db.session.add(endereco)
             db.session.commit()
@@ -70,12 +70,12 @@ class EnderecoById(Resource):
                 message = Message(f"Endereço {id} não encontrado", 1)
                 return marshal(message, message_fields)
             
+            endereco.id_cidade = args["id_cidade"]
             endereco.cep = args["cep"]
             endereco.numero = args["numero"]
             endereco.complemento = args["complemento"]
             endereco.referencia = args["referencia"]
             endereco.logradouro = args["logradouro"]
-            
             
             db.session.add(endereco)
             db.session.commit()

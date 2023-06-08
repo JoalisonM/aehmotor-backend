@@ -3,9 +3,12 @@ from flask_restful import fields
 from helpers.database import db
 
 uf_fields = {
-  'id': fields.Integer,
+  'codigo_uf': fields.Integer,
+  'uf': fields.String,
   'nome': fields.String,
-  'sigla': fields.String,
+  'latitude': fields.Float,
+  'longitude': fields.Float,
+  'regiao': fields.String,
 }
 
 class Uf(db.Model):

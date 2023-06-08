@@ -13,7 +13,7 @@ parser.add_argument('nascimento', type=str, help='Problema no nascimento', requi
 parser.add_argument('telefone', type=str, help='Problema no telefone', required=True)
 parser.add_argument('senha', type=str, help='Problema na senha', required=True)
 parser.add_argument('cargo', type=str, help='Problema no cargo', required=True)
-parser.add_argument('idVeiculo', type=int, help='Problema no id de veículo')
+parser.add_argument('id_veiculo', type=int, help='Problema no id de veículo')
 
 
 class Motoristas(Resource):
@@ -31,10 +31,10 @@ class Motoristas(Resource):
             telefone = args["telefone"]
             senha = args["senha"]
             cargo = args["cargo"]
-            idVeiculo = args["idVeiculo"]
+            id_veiculo = args["id_veiculo"]
             
 
-            motorista = Motorista(nome, email, nascimento, telefone, senha, cargo,idVeiculo)
+            motorista = Motorista(nome, email, nascimento, telefone, senha, cargo,id_veiculo)
 
             db.session.add(motorista)
             db.session.commit()
@@ -77,7 +77,7 @@ class MotoristaById(Resource):
             motorista.telefone = args["telefone"]
             motorista.senha = args["senha"]
             motorista.cargo = args["cargo"]
-            motorista.idVeiculo = args["idVeiculo"]
+            motorista.id_veiculo = args["id_veiculo"]
             
 
             db.session.add(motorista)

@@ -12,7 +12,7 @@ aluno_fields = {
   'matricula' : fields.String,
   'curso' : fields.String,
   'turno' : fields.String,
-  'idInstituicaoEnsino': fields.Integer,
+  'id_instituicao_ensino': fields.Integer,
 }
 
 class Aluno(Pessoa):
@@ -30,12 +30,12 @@ class Aluno(Pessoa):
 
   __mapper_args__ = {"polymorphic_identity": "aluno"}
 
-  def __init__(self, nome, email, nascimento, telefone, senha, matricula, curso, turno, idInstituicaoEnsino):
+  def __init__(self, nome, email, nascimento, telefone, senha, matricula, curso, turno, id_instituicao_ensino):
     super().__init__(nome, email, nascimento, telefone, senha)
     self.curso = curso
     self.turno = turno
     self.matricula = matricula
-    self.idInstituicaoEnsino = idInstituicaoEnsino
+    self.id_instituicao_ensino = id_instituicao_ensino
 
   def __repr__(self):
     return f'<Aluno {self.matricula}>'

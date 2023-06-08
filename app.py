@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from flask_restful import Api
 from flask import Flask, Blueprint
 
@@ -16,6 +18,8 @@ from resources.funcionario import Funcionarios, FuncionarioById
 from resources.rota import Rotas, RotaById
 from resources.prefeitura import Prefeituras, PrefeituraById
 
+load_dotenv()
+
 # create the app
 app = Flask(__name__)
 
@@ -23,7 +27,10 @@ app = Flask(__name__)
 api_bp = Blueprint('api', __name__)
 api = Api(api_bp, prefix="/api")
 
-DB_URL = "postgresql://postgres:1234@localhost:5432/aehmotor"
+postgresUser = os.getenv("POSTGRES_USER")
+postgresPassword = os.getenv("POSTGRES_PASSWORD")
+
+DB_URL = f"postgresql://{postgresUser}:{postgresPassword}@localhost:5432/aehmotor"
 app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -50,7 +57,7 @@ api.add_resource(EnderecoById,'/enderecos/<int:id>')
 api.add_resource(Ufs, '/ufs')
 api.add_resource(UfById, '/ufs/<int:id>')
 api.add_resource(InstituicoesDeEnsino, '/instituicoesDeEnsino')
-api.add_resource(InstituicaoDeEnsinoById, 'instituicoesDeEnsino/<int:id>')
+api.add_resource(InstituicaoDeEnsinoById, '/instituicoesDeEnsino/<int:id>')
 api.add_resource(Funcionarios, '/funcionarios')
 api.add_resource(FuncionarioById, '/funcionarios/<int:id>')
 api.add_resource(Rotas, '/rotas')
