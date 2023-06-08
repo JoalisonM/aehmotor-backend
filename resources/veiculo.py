@@ -7,8 +7,8 @@ from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
 parser.add_argument('cidade', type=str, help='Problema no campo de cidade',required=True)
-parser.add_argument('qtdPassageiros', type=int, help='Problema na quantiade de passageiros',required=True)
-parser.add_argument('tipoVeiculo', type=str, help='Problema no tipo de veículo',required=True)
+parser.add_argument('qtd_passageiros', type=int, help='Problema na quantidade de passageiros',required=True)
+parser.add_argument('tipo_veiculo', type=str, help='Problema no tipo de veículo',required=True)
 parser.add_argument('placa', type=str, help='Problema na placa do veículo',required=True)
 
 
@@ -22,12 +22,12 @@ class Veiculos(Resource):
         args = parser.parse_args()
         try:
            cidade = args["cidade"]
-           qtdPassageiros = args["qtdPassageiros"]
-           tipoVeiculo = args["tipoVeiculo"]
+           qtd_passageiros = args["qtd_passageiros"]
+           tipo_veiculo = args["tipo_veiculo"]
            placa = args["placa"]
-           
-           veiculo = Veiculo(cidade, qtdPassageiros, tipoVeiculo, placa)
-            
+
+           veiculo = Veiculo(cidade, qtd_passageiros, tipo_veiculo, placa)
+
            db.session.add(veiculo)
            db.session.commit()
 
@@ -65,11 +65,10 @@ class VeiculoById(Resource):
                 return marshal(message, message_fields)
 
             veiculo.cidade = args["cidade"]
-            veiculo.qtdPassageiros = args["qtdPassageiros"]
-            veiculo.tipoVeiculo = args["tipoVeiculo"]
+            veiculo.qtd_passageiros = args["qtd_passageiros"]
+            veiculo.tipo_veiculo = args["tipo_veiculo"]
             veiculo.placa = args["placa"]
-            
-            
+
             db.session.add(veiculo)
             db.session.commit()
 

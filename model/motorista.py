@@ -13,7 +13,7 @@ motorista_fields = {
   'telefone': fields.String,
   'senha' : fields.String,
   'cargo':fields.String,
-  'idVeiculo' : fields.Integer,
+  'id_veiculo' : fields.Integer,
 }
 
 class Motorista(Funcionario):
@@ -24,9 +24,9 @@ class Motorista(Funcionario):
 
   __mapper_args__ = {"polymorphic_identity": "motorista"}
 
-  def __init__(self, nome, nascimento, email, telefone, senha, cargo, idVeiculo):
+  def __init__(self, nome, nascimento, email, telefone, senha, cargo, id_veiculo):
     super().__init__(nome, nascimento, email, telefone, senha, cargo)
-    self.idVeiculo = idVeiculo
+    self.id_veiculo = id_veiculo
 
   def __repr__(self):
     return f'< Veiculo {self.id}>'

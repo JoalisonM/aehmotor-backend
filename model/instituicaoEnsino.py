@@ -6,7 +6,7 @@ instituicaoEnsino_fields = {
   'id': fields.Integer,
   'nome': fields.String,
   'telefone': fields.String,
-  'idEndereco': fields.Integer,
+  'id_endereco': fields.Integer,
 }
 
 
@@ -21,11 +21,11 @@ class InstituicaoEnsino(db.Model):
   rota = db.relationship("Rota", uselist=False, backref="instituicao_ensino")
   aluno = db.relationship("Aluno", uselist=False, backref="instituicao_ensino")
 
-  def __init__(self, nome, telefone, idEndereco):
+  def __init__(self, nome, telefone, id_endereco):
     super().__init__()
     self.nome = nome
     self.telefone = telefone
-    self.idEndereco = idEndereco
+    self.id_endereco = id_endereco
 
   def __repr__(self):
     return f'<Endereço>'

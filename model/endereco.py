@@ -3,8 +3,10 @@ from helpers.database import db
 
 endereco_fields = {
   'id': fields.Integer,
+  'id_pessoa': fields.Integer,
+  'id_cidade': fields.Integer,
   'cep': fields.String,
-  'numero': fields.String,
+  'numero': fields.Integer,
   'complemento': fields.String,
   'referencia': fields.String,
   'logradouro': fields.String,
@@ -25,10 +27,11 @@ class Endereco(db.Model):
   prefeitura = db.relationship("Prefeitura", uselist=False, backref="endereco")
   instituicao_ensino = db.relationship("InstituicaoEnsino", uselist=False, backref="endereco")
 
-  def __init__(self, cep, numero, complemento, referencia, logradouro, idCidade, idPessoa):
+  def __init__(self, cep, numero, complemento, referencia, logradouro, id_cidade, id_pessoa):
     self.cep = cep
     self.numero = numero
-    self.idCidade = idCidade
+    self.id_cidade = id_cidade
+    self.id_pessoa = id_pessoa
     self.referencia = referencia
     self.logradouro = logradouro
     self.complemento = complemento

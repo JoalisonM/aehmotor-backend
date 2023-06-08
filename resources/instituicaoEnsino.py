@@ -19,7 +19,7 @@ from helpers.base_logger import logger
 parser = reqparse.RequestParser()
 parser.add_argument('nome', type=str, help='Problema no nome', required=True)
 parser.add_argument('telefone', type=str, help='Problema no telefone', required=True)
-parser.add_argument('idEndereco', type=int, help='Problema no endereço', required=False)
+parser.add_argument('id_endereco', type=int, help='Problema no endereço', required=False)
 
 
 class InstituicoesDeEnsino(Resource):
@@ -33,9 +33,9 @@ class InstituicoesDeEnsino(Resource):
         try:
             nome = args["nome"]
             telefone = args["telefone"]
-            idEndereco = args["idEndereco"]
+            id_endereco = args["id_endereco"]
 
-            instituicaoEnsino = InstituicaoEnsino(nome, telefone, idEndereco)
+            instituicaoEnsino = InstituicaoEnsino(nome, telefone, id_endereco)
 
             db.session.add(instituicaoEnsino)
             db.session.commit()
@@ -75,7 +75,7 @@ class InstituicaoDeEnsinoById(Resource):
 
             instituicaoEnsino.nome = args["nome"]
             instituicaoEnsino.telefone = args["telefone"]
-            instituicaoEnsino.idEndereco = args["idEndereco"]
+            instituicaoEnsino.id_endereco = args["id_endereco"]
 
             db.session.add(instituicaoEnsino)
             db.session.commit()

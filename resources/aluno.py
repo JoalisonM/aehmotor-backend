@@ -2,16 +2,7 @@ from flask_restful import Resource, reqparse, marshal
 
 from model.aluno import *
 from model.instituicaoEnsino import *
-from model.endereco import *
-from model.cidade import *
-from model.uf import *
-from model.prefeitura import *
-from model.funcionario import *
 from model.passageiro import *
-from model.motorista import *
-from model.pessoa import *
-from model.veiculo import *
-from model.rota import *
 from model.message import *
 from helpers.database import db
 from helpers.base_logger import logger
@@ -25,7 +16,7 @@ parser.add_argument('senha', type=str, help='Problema na senha', required=True)
 parser.add_argument('matricula', type=str, help='Problema na matrícula', required=False)
 parser.add_argument('curso', type=str, help='Problema no curso', required=False)
 parser.add_argument('turno', type=str, help='Problema no turno', required=False)
-parser.add_argument('idInstituicaoEnsino', type=int, help='Problema no endereço', required=False)
+parser.add_argument('id_instituicao_ensino', type=int, help='Problema na faculdade', required=False)
 
 
 class Alunos(Resource):
@@ -45,9 +36,9 @@ class Alunos(Resource):
             matricula = args["matricula"]
             curso = args["curso"]
             turno = args["turno"]
-            idInstituicaoEnsino = args["idInstituicaoEnsino"]
+            id_instituicao_ensino = args["id_instituicao_ensino"]
 
-            aluno = Aluno(nome, email, nascimento, telefone, senha, matricula, curso, turno, idInstituicaoEnsino)
+            aluno = Aluno(nome, email, nascimento, telefone, senha, matricula, curso, turno, id_instituicao_ensino)
 
             db.session.add(aluno)
             db.session.commit()
@@ -93,6 +84,7 @@ class AlunoById(Resource):
             aluno.matricula = args["matricula"]
             aluno.curso = args["curso"]
             aluno.turno = args["turno"]
+            aluno.id_instituicao_ensino = args["id_instituicao_ensino"]
 
             db.session.add(aluno)
             db.session.commit()
