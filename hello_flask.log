@@ -1,42 +1,4 @@
-2023-06-06 01:53:36,585 INFO _internal _log  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
-2023-06-06 01:53:40,250 INFO motorista get Motoristas listados com sucesso!
-2023-06-06 01:53:40,477 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:53:40] "GET /api/motoristas HTTP/1.1" 200 -
-2023-06-06 01:54:13,674 ERROR motorista post error: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "pessoa_email_key"
-DETAIL:  Key (email)=(joalison@gmail.com) already exists.
-
-[SQL: INSERT INTO pessoa (nome, email, nascimento, telefone, senha, tipo) VALUES (%(nome)s, %(email)s, %(nascimento)s, %(telefone)s, %(senha)s, %(tipo)s) RETURNING pessoa.id]
-[parameters: {'nome': 'Joalison', 'email': 'joalison@gmail.com', 'nascimento': '2001-04-13', 'telefone': '8398848285', 'senha': 'joaj', 'tipo': 'motorista'}]
-(Background on this error at: https://sqlalche.me/e/20/gkpj)
-2023-06-06 01:54:13,677 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:54:13] "[33mPOST /api/motoristas HTTP/1.1[0m" 404 -
-2023-06-06 01:54:45,990 INFO motorista post Motorista cadastrado com sucesso!
-2023-06-06 01:54:45,999 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:54:45] "[35m[1mPOST /api/motoristas HTTP/1.1[0m" 201 -
-2023-06-06 01:55:16,793 INFO motorista get Motoristas listados com sucesso!
-2023-06-06 01:55:16,798 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:55:16] "GET /api/motoristas HTTP/1.1" 200 -
-2023-06-06 01:55:28,745 INFO motorista get Motorista 42 encontrado com sucesso!
-2023-06-06 01:55:28,747 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:55:28] "GET /api/motoristas/42 HTTP/1.1" 200 -
-2023-06-06 01:55:40,864 INFO motorista get Motorista 42 encontrado com sucesso!
-2023-06-06 01:55:40,866 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:55:40] "GET /api/motoristas/42 HTTP/1.1" 200 -
-2023-06-06 01:55:52,763 INFO motorista get Motorista 42 encontrado com sucesso!
-2023-06-06 01:55:52,764 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:55:52] "GET /api/motoristas/42 HTTP/1.1" 200 -
-2023-06-06 01:56:34,516 INFO motorista put Motorista cadastrado com sucesso!
-2023-06-06 01:56:34,521 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:56:34] "PUT /api/motoristas/42 HTTP/1.1" 200 -
-2023-06-06 01:56:47,627 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:56:47] "DELETE /api/motoristas/42 HTTP/1.1" 200 -
-2023-06-06 01:56:52,886 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:56:52] "[33mGET /api/motoristas/ HTTP/1.1[0m" 404 -
-2023-06-06 01:57:05,129 INFO motorista get Motoristas listados com sucesso!
-2023-06-06 01:57:05,156 INFO _internal _log 127.0.0.1 - - [06/Jun/2023 01:57:05] "GET /api/motoristas HTTP/1.1" 200 -
-2023-05-30 17:03:53,960 WARNING _internal _log  * Debugger is active!
-2023-05-30 17:03:54,019 INFO _internal _log  * Debugger PIN: 830-099-024
-2023-05-30 17:04:12,835 INFO uf get Ufs listados com sucesso!
-2023-05-30 17:04:12,886 INFO _internal _log 127.0.0.1 - - [30/May/2023 17:04:12] "GET /api/ufs HTTP/1.1" 200 -
-2023-05-30 17:04:18,696 INFO instituicaoEnsino get Instituições listados com sucesso!
-2023-05-30 17:04:18,700 INFO _internal _log 127.0.0.1 - - [30/May/2023 17:04:18] "GET /api/instituicoesDeEnsino HTTP/1.1" 200 -
-2023-05-30 17:05:56,540 INFO _internal _log 127.0.0.1 - - [30/May/2023 17:05:56] "[31m[1mPOST /api/instituicoesDeEnsino HTTP/1.1[0m" 400 -
-2023-05-30 17:06:01,200 INFO instituicaoEnsino get Instituições listados com sucesso!
-2023-05-30 17:06:01,202 INFO _internal _log 127.0.0.1 - - [30/May/2023 17:06:01] "GET /api/instituicoesDeEnsino HTTP/1.1" 200 -
-2023-05-30 17:06:49,693 ERROR instituicaoEnsino post error: (psycopg2.errors.ForeignKeyViolation) insert or update on table "instituicaoEnsino" violates foreign key constraint "instituicaoEnsino_idEndereco_fkey"
-DETAIL:  Key (idEndereco)=(1) is not present in table "endereco".
-
-[SQL: INSERT INTO "instituicaoEnsino" (nome, telefone, "idEndereco") VALUES (%(nome)s, %(telefone)s, %(idEndereco)s) RETURNING "instituicaoEnsino".id]
-[parameters: {'nome': 'IFPB', 'telefone': '986523652', 'idEndereco': 1}]
-(Background on this error at: https://sqlalche.me/e/20/gkpj)
-2023-05-30 17:06:49,693 INFO _internal _log 127.0.0.1 - - [30/May/2023 17:06:49] "[33mPOST /api/instituicoesDeEnsino HTTP/1.1[0m" 404 -
+2023-06-15 16:28:49,367 WARNING _internal _log  * Debugger is active!
+2023-06-15 16:28:49,367 INFO _internal _log  * Debugger PIN: 125-554-074
+2023-06-15 16:28:52,008 INFO instituicaoEnsino post Instituição de Ensino cadastrado com sucesso!
+2023-06-15 16:28:52,018 INFO _internal _log 127.0.0.1 - - [15/Jun/2023 16:28:52] "[35m[1mPOST /api/instituicoesDeEnsino HTTP/1.1[0m" 201 -

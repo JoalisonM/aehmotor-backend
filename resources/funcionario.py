@@ -14,7 +14,6 @@ parser.add_argument('senha', type=str, help='Problema no senha', required=True)
 parser.add_argument('cargo', type=str, help='Problema no cargo', required=True)
 
 
-
 class Funcionarios(Resource):
     def get(self):
         logger.info("Funcionários listados com sucesso!")

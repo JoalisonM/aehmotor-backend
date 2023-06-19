@@ -38,7 +38,7 @@ def upgrade():
                type_=sa.Time(),
                existing_nullable=False)
 
-    with op.batch_alter_table('uf', schema=None) as batch_op:
+    """with op.batch_alter_table('uf', schema=None) as batch_op:
         batch_op.alter_column('latitude',
                existing_type=sa.REAL(),
                type_=sa.Float(precision=8),
@@ -52,7 +52,7 @@ def upgrade():
         batch_op.drop_column('-63.34')
         batch_op.drop_column('-10.83')
         batch_op.drop_column('rondônia')
-        batch_op.drop_column('ro')
+        batch_op.drop_column('ro')"""
 
     # ### end Alembic commands ###
 
