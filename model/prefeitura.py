@@ -18,7 +18,8 @@ class Prefeitura(db.Model):
 
   rota = db.relationship("Rota", uselist=False, backref="prefeitura")
 
-  def __init__ (self, secretario, id_endereco):
+  def __init__ (self, nome, secretario, id_endereco):
+    self.nome=nome
     self.secretario=secretario
     self.id_endereco=id_endereco
 

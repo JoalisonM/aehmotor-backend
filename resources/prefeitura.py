@@ -35,7 +35,7 @@ class Prefeituras(Resource):
             secretario = args["secretario"]
             id_endereco = args["id_endereco"]
 
-            prefeitura = Prefeitura(secretario, id_endereco)
+            prefeitura = Prefeitura(nome, secretario, id_endereco)
 
             db.session.add(prefeitura)
             db.session.commit()
