@@ -1,5 +1,6 @@
 from flask_restful import fields
 from helpers.database import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 pessoa_fields = {
   'id': fields.Integer,
@@ -32,9 +33,12 @@ class Pessoa(db.Model):
   def __init__(self, nome, email, nascimento, telefone, senha):
     self.nome = nome
     self.email = email
-    self.senha = senha
+    self.senha = generate_password_hash(senha)
     self.telefone = telefone
     self.nascimento = nascimento
+
+  def verificar_senha(self, senha):
+    return check_password_hash(self.senha, senha)
 
   def __repr__(self):
     return f'<Pessoa {self.nome}>'

@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse, marshal
-
+from helpers.auth.token_handler.token_verificador import token_verifica
 from model.aluno import *
 from model.instituicaoEnsino import *
 from model.passageiro import *
@@ -20,7 +20,8 @@ parser.add_argument('id_instituicao_ensino', type=int, help='Problema na faculda
 
 
 class Alunos(Resource):
-    def get(self):
+    @token_verifica
+    def get(self,refresh_token):
         logger.info("Alunos listados com sucesso!")
         alunos = Aluno.query.all()
         return marshal(alunos, aluno_fields), 200

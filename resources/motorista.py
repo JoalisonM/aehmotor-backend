@@ -32,7 +32,7 @@ class Motoristas(Resource):
             senha = args["senha"]
             cargo = args["cargo"]
             id_veiculo = args["id_veiculo"]
-            
+
 
             motorista = Motorista(nome, email, nascimento, telefone, senha, cargo,id_veiculo)
 
@@ -51,16 +51,16 @@ class Motoristas(Resource):
 class MotoristaById(Resource):
     def get(self, id):
         motorista = Motorista.query.get(id)
-        
+
         if motorista is None:
             logger.error(f"Motorista {id} não encontrado")
-            
+
             message = Message(f"Motorista {id} não encotrado", 1)
             return marshal(message), 404
-        
+
         logger.info(f"Motorista {id} encontrado com sucesso!")
         return marshal(motorista, motorista_fields), 200
-    
+
     def put(self, id):
         args = parser.parse_args()
 
@@ -78,7 +78,7 @@ class MotoristaById(Resource):
             motorista.senha = args["senha"]
             motorista.cargo = args["cargo"]
             motorista.id_veiculo = args["id_veiculo"]
-            
+
 
             db.session.add(motorista)
             db.session.commit()

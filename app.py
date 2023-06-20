@@ -2,9 +2,9 @@ import os
 from dotenv import load_dotenv
 from flask_restful import Api
 from flask import Flask, Blueprint
-
 from helpers.cors import cors
 from helpers.database import db, migrate
+from resources.login import Login
 from resources.motorista import Motoristas, MotoristaById
 from resources.veiculo import Veiculos, VeiculoById
 from resources.passageiro import Passageiros, PassageiroById
@@ -39,7 +39,7 @@ db.init_app(app)
 cors.init_app(app)
 migrate.init_app(app, db)
 
-
+api.add_resource(Login, '/login')
 api.add_resource(Motoristas,'/motoristas')
 api.add_resource(MotoristaById,'/motoristas/<int:id>')
 api.add_resource(Veiculos,'/veiculos')
