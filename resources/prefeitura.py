@@ -119,7 +119,9 @@ class PrefeituraById(Resource):
     
 class PrefeituraByNome(Resource):
     def get(self, nome):
-        prefeitura = Prefeitura.query.filter_by(nome=nome).first()
+        prefeitura = Prefeitura.query.filter(
+            Prefeitura.nome.ilike(f"%{nome}%")
+        ).all()
 
         if prefeitura is None:
             logger.error(f"Prefeitura {id} não encontrado")

@@ -102,7 +102,9 @@ class FuncionarioById(Resource):
     
 class FuncionarioByNome(Resource):
     def get(self, nome):
-        funcionario = Funcionario.query.filter_by(nome=nome).first()
+        funcionario = Funcionario.query.filter(
+            Funcionario.nome.ilike(f"%{nome}%")
+        ).all()
 
         if funcionario is None:
             logger.error(f"Funcionário {id} não encontrado")

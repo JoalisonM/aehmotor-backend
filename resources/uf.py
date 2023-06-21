@@ -100,7 +100,7 @@ class UfById(Resource):
 
 class UfByNome(Resource):
     def get(self, nome):
-        uf = Uf.query.filter_by(nome=nome).first()
+        uf = Uf.query.filter_by(nome=nome).all()
 
         if uf is None:
             logger.error(f"Uf {id} não encontrado")

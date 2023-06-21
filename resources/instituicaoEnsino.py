@@ -118,7 +118,9 @@ class InstituicaoDeEnsinoById(Resource):
     
 class InstituicaoDeEnsinoByNome(Resource):
     def get(self, nome):
-        instituicaoEnsino = InstituicaoEnsino.query.filter_by(nome=nome).first()
+        instituicaoEnsino = InstituicaoEnsino.query.filter(
+            InstituicaoEnsino.nome.ilike(f"%{nome}%")
+        ).all()
 
         if instituicaoEnsino is None:
             logger.error(f"Instituição de Ensino {id} não encontrado")

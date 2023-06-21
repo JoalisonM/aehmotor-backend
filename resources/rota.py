@@ -117,9 +117,11 @@ class RotaById(Resource):
         message = Message("Rota deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
 
-class RotaByNome(Resource):
-    def get(self, nome):
-        rota = Rota.query.filter_by(nome=cidade_destino).first()
+class RotaByCidadeDestino(Resource):
+    def get(self, cidade_destino):
+        rota = Rota.query.filter(
+            Rota.cidade_destino.ilike(f"%{cidade_destino}%")
+        ).all()
 
         if rota is None:
             logger.error(f"Rota {id} não encontrada")

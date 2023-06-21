@@ -99,7 +99,7 @@ class PessoaById(Resource):
 
 class PessoaByNome(Resource):
     def get(self, nome):
-        pessoa = Pessoa.query.filter_by(nome=nome).first()
+        pessoa = Pessoa.query.filter_by(nome=nome).all()
 
         if pessoa is None:
             logger.error(f"Pessoa {id} não encontrado")
