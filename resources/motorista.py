@@ -104,3 +104,16 @@ class MotoristaById(Resource):
 
         message = Message("Motorista deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+
+class MotoristaByNome(Resource):
+    def get(self, nome):
+        motorista = Motorista.query.filter_by(nome=nome).first()
+
+        if motorista is None:
+            logger.error(f"Motorista {id} não encontrado")
+
+            message = Message(f"Motorista {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Motorista {id} encontrado com sucesso!")
+        return marshal(motorista, motorista_fields), 200

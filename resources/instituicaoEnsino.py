@@ -115,3 +115,16 @@ class InstituicaoDeEnsinoById(Resource):
 
         message = Message("Instituição de Ensino deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+    
+class InstituicaoDeEnsinoByNome(Resource):
+    def get(self, nome):
+        instituicaoEnsino = InstituicaoEnsino.query.filter_by(nome=nome).first()
+
+        if instituicaoEnsino is None:
+            logger.error(f"Instituição de Ensino {id} não encontrado")
+
+            message = Message(f"Instituição de Ensino {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Instituição de Ensino {id} encontrado com sucesso!")
+        return marshal(instituicaoEnsino, instituicaoEnsino_fields), 200

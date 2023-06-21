@@ -1,4 +1,2 @@
-2023-06-15 16:28:49,367 WARNING _internal _log  * Debugger is active!
-2023-06-15 16:28:49,367 INFO _internal _log  * Debugger PIN: 125-554-074
-2023-06-15 16:28:52,008 INFO instituicaoEnsino post Instituição de Ensino cadastrado com sucesso!
-2023-06-15 16:28:52,018 INFO _internal _log 127.0.0.1 - - [15/Jun/2023 16:28:52] "[35m[1mPOST /api/instituicoesDeEnsino HTTP/1.1[0m" 201 -
+2023-06-20 21:11:18,714 WARNING _internal _log  * Debugger is active!
+2023-06-20 21:11:18,773 INFO _internal _log  * Debugger PIN: 458-736-514

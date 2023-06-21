@@ -110,3 +110,16 @@ class AlunoById(Resource):
 
         message = Message("Aluno deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+
+class AlunoByNome(Resource):
+    def get(self, nome):
+        aluno = Aluno.query.filter_by(nome=nome).first()
+
+        if aluno is None:
+            logger.error(f"Aluno {id} não encontrado")
+
+            message = Message(f"Aluno {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Aluno {id} encontrado com sucesso!")
+        return marshal(aluno, aluno_fields), 200

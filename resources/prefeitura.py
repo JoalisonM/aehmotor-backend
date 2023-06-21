@@ -116,3 +116,16 @@ class PrefeituraById(Resource):
 
         message = Message("Prefeitura deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+    
+class PrefeituraByNome(Resource):
+    def get(self, nome):
+        prefeitura = Prefeitura.query.filter_by(nome=nome).first()
+
+        if prefeitura is None:
+            logger.error(f"Prefeitura {id} não encontrado")
+
+            message = Message(f"Prefeitura {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Prefeitura {id} encontrado com sucesso!")
+        return marshal(prefeitura, prefeitura_fields), 200

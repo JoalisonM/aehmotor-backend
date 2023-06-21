@@ -93,3 +93,16 @@ class VeiculoById(Resource):
 
         message = Message("Veículo deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+
+class VeiculoByNome(Resource):
+    def get(self, nome):
+        veiculo = Veiculo.query.filter_by(nome=placa).first()
+
+        if veiculo is None:
+            logger.error(f"Veículo {id} não encontrado")
+
+            message = Message(f"Veículo {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Veículo {id} encontrado com sucesso!")
+        return marshal(veiculo, veiculo_fields), 200    

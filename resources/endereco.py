@@ -100,3 +100,16 @@ class EnderecoById(Resource):
         
         message = Message("Endereço deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+
+class EnderecoByNome(Resource):
+    def get(self, nome):
+        endereco = Endereco.query.filter_by(nome=logradouro).first()
+
+        if endereco is None:
+            logger.error(f"Endereço {id} não encontrado")
+
+            message = Message(f"Endereço {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Endereço {id} encontrado com sucesso!")
+        return marshal(endereco, endereco_fields), 200
