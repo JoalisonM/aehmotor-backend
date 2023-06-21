@@ -17,9 +17,9 @@ from helpers.database import db
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
-parser.add_argument('secretario', type=str, help='Problema no id do secretario', required=True)
-parser.add_argument('id_endereco', type=str, help='Problema no telefone', required=True)
+parser.add_argument('endereco', type=dict, help= 'Problema no endereço', required=True)
 parser.add_argument('nome', type=str, help='Problema no nome', required=True)
+parser.add_argument('secretario', type=str, help='Problema no id do secretario', required=True)
 
 
 class Prefeituras(Resource):
@@ -29,13 +29,28 @@ class Prefeituras(Resource):
         return marshal(prefeituras, prefeitura_fields), 200
 
     def post(self):
+
         args = parser.parse_args()
         try:
             nome = args["nome"]
             secretario = args["secretario"]
-            id_endereco = args["id_endereco"]
+            enderecoResponse = args["endereco"]
 
-            prefeitura = Prefeitura(secretario, id_endereco)
+            #Criar endereço 
+            endereco = Endereco(
+                cep=enderecoResponse["cep"],
+                numero=enderecoResponse["numero"],
+                complemento=enderecoResponse["complemento"],
+                referencia=enderecoResponse["referencia"],
+                logradouro=enderecoResponse["logradouro"],
+                id_cidade=enderecoResponse["id_cidade"],
+                id_pessoa=enderecoResponse["id_pessoa"]
+            )
+
+            db.session.add(endereco)
+            db.session.commit()
+
+            prefeitura = Prefeitura(nome, secretario, id_endereco=endereco.id)
 
             db.session.add(prefeitura)
             db.session.commit()
@@ -46,7 +61,7 @@ class Prefeituras(Resource):
         except Exception as e:
             logger.error(f"error: {e}")
 
-            message = Message("Error ao cadastrar a Uf", 2)
+            message = Message("Error ao cadastrar a Prefeitura", 2)
             return marshal(message, message_fields), 404
 
 class PrefeituraById(Resource):
@@ -85,7 +100,7 @@ class PrefeituraById(Resource):
         except Exception as e:
             logger.error(f"error: {e}")
 
-            message = Message("Error ao atualizar a Uf", 2)
+            message = Message("Error ao atualizar a Prefeitura", 2)
             return marshal(message, message_fields), 404
 
     def delete(self, id):
@@ -101,3 +116,16 @@ class PrefeituraById(Resource):
 
         message = Message("Prefeitura deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+    
+class PrefeituraByNome(Resource):
+    def get(self, nome):
+        prefeitura = Prefeitura.query.filter_by(nome=nome).first()
+
+        if prefeitura is None:
+            logger.error(f"Prefeitura {id} não encontrado")
+
+            message = Message(f"Prefeitura {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Prefeitura {id} encontrado com sucesso!")
+        return marshal(prefeitura, prefeitura_fields), 200

@@ -14,7 +14,6 @@ parser.add_argument('senha', type=str, help='Problema no senha', required=True)
 parser.add_argument('cargo', type=str, help='Problema no cargo', required=True)
 
 
-
 class Funcionarios(Resource):
     def get(self):
         logger.info("Funcionários listados com sucesso!")
@@ -100,3 +99,16 @@ class FuncionarioById(Resource):
 
         message = Message("Funcionário deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+    
+class FuncionarioByNome(Resource):
+    def get(self, nome):
+        funcionario = Funcionario.query.filter_by(nome=nome).first()
+
+        if funcionario is None:
+            logger.error(f"Funcionário {id} não encontrado")
+
+            message = Message(f"Funcionário {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Funcionário {id} encontrado com sucesso!")
+        return marshal(funcionario, funcionario_fields), 200
