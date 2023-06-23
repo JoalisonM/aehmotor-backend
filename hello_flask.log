@@ -1,9 +1,16 @@
-2023-06-20 10:26:34,040 INFO _internal _log [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5000
-2023-06-20 10:26:34,040 INFO _internal _log [33mPress CTRL+C to quit[0m
-2023-06-20 10:26:39,539 INFO aluno get Alunos listados com sucesso!
-2023-06-20 10:26:39,769 INFO _internal _log 127.0.0.1 - - [20/Jun/2023 10:26:39] "GET /api/alunos HTTP/1.1" 200 -
-2023-06-20 10:27:08,548 INFO aluno post Aluno cadastrado com sucesso!
-2023-06-20 10:27:08,558 INFO _internal _log 127.0.0.1 - - [20/Jun/2023 10:27:08] "[35m[1mPOST /api/alunos HTTP/1.1[0m" 201 -
-2023-06-20 10:27:12,158 INFO aluno get Alunos listados com sucesso!
-2023-06-20 10:27:12,158 INFO _internal _log 127.0.0.1 - - [20/Jun/2023 10:27:12] "GET /api/alunos HTTP/1.1" 200 -
+2023-06-23 16:24:03,665 WARNING _internal _log  * Debugger is active!
+2023-06-23 16:24:03,678 INFO _internal _log  * Debugger PIN: 724-239-092
+2023-06-23 16:24:11,929 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:11] "[31m[1mPOST /api/logout HTTP/1.1[0m" 401 -
+2023-06-23 16:24:16,635 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:16] "[31m[1mGET /api/alunos HTTP/1.1[0m" 401 -
+2023-06-23 16:24:25,326 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:25] "POST /api/login HTTP/1.1" 200 -
+2023-06-23 16:24:42,436 INFO aluno get Alunos listados com sucesso!
+2023-06-23 16:24:42,447 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:42] "GET /api/alunos HTTP/1.1" 200 -
+2023-06-23 16:24:52,492 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:52] "POST /api/logout HTTP/1.1" 200 -
+2023-06-23 16:24:57,836 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:57] "[31m[1mGET /api/alunos HTTP/1.1[0m" 401 -
+2023-06-23 16:26:10,073 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:10] "[31m[1mPOST /api/cidades HTTP/1.1[0m" 400 -
+2023-06-23 16:26:15,592 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:15] "[31m[1mGET /api/cidades HTTP/1.1[0m" 401 -
+2023-06-23 16:26:26,901 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:26] "[31m[1mGET /api/pessoas HTTP/1.1[0m" 401 -
+2023-06-23 16:26:37,204 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:37] "[31m[1mGET /api/cidades HTTP/1.1[0m" 401 -
+2023-06-23 16:26:41,305 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:41] "[31m[1mPUT /api/cidades/7 HTTP/1.1[0m" 400 -
+2023-06-23 16:27:32,009 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:27:32] "[31m[1mGET /api/pessoas HTTP/1.1[0m" 401 -
+2023-06-23 16:27:47,145 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:27:47] "[31m[1mGET /api/cidades HTTP/1.1[0m" 401 -

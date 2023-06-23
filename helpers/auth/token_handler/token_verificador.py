@@ -1,9 +1,10 @@
 from functools import wraps
-from flask import jsonify, request
-from flask_restful import marshal
-import jwt
+from flask_restful import request, marshal
+from jwt import InvalidSignatureError, ExpiredSignatureError,decode
 from model.message import Message,message_fields
+from model.blackList import BlackList
 from helpers.auth.token_handler.token_singleton import token_criador
+from model.token import Token, tokenFields
 
 def token_verifica(function: callable) -> callable:
 
@@ -13,31 +14,39 @@ def token_verifica(function: callable) -> callable:
 
 
         if not token_puro:
-            messageAl = Message("Login não autorizado",2)
-
-            return marshal(messageAl,message_fields), 400
+            message = Message("Login não autorizado",2)
+            return marshal(message, message_fields), 400
 
         try:
             token = token_puro.split()[1]
-            token_informacao = jwt.decode(
-                token, key='1234', algorithms="HS256")
-            token_id = token_informacao["id"]
+            token_informacao = decode(
+            token, key='1234', algorithms="HS256")
+            token_tipo = token_informacao["tipo"]
 
-        except jwt.InvalidSignatureError:
-            return jsonify({'error': 'Token inválido'}), 400
+        except InvalidSignatureError:
+            message = Message("Token inválido", 1)
 
-        except jwt.ExpiredSignatureError:
-            return jsonify({
-                'error': 'Token expirado'
-            }), 401
+            return marshal(message, message_fields), 400
+
+        except ExpiredSignatureError:
+            message = Message("Token de acesso expirado", 2)
+
+            return marshal(message, message_fields), 401
 
         except KeyError as e:
-            return jsonify({
-                'error': 'Token inválido (2)'
-            }), 401
+            message = Message("Token inválido(2)", 2)
 
+            return marshal(message, message_fields), 401
+
+        blackList_token = BlackList.query.filter_by(token = token).first()
+        if blackList_token:
+            message = Message("Acesso negado.", 0)
+
+            return marshal (message, message_fields), 401
 
         next_token = token_criador.refresh(token)
-        return function( *args, next_token, **kwargs)
+
+        return function( *args, next_token, token_tipo, **kwargs)
 
     return  decorated
+

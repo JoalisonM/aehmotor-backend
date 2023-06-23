@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse, marshal
-
+from helpers.auth.token_handler.token_verificador import token_verifica
 from model.aluno import *
 from model.instituicaoEnsino import *
 from model.endereco import *
@@ -23,12 +23,14 @@ parser.add_argument('nome', type=str, help='Problema no nome', required=True)
 
 
 class Prefeituras(Resource):
-    def get(self):
+    @token_verifica
+    def get(self, refresh_token, token_tipo):
         logger.info("Prefeituras listados com sucesso!")
         prefeituras = Prefeitura.query.all()
         return marshal(prefeituras, prefeitura_fields), 200
 
-    def post(self):
+    @token_verifica
+    def post(self, refresh_token, token_tipo):
         args = parser.parse_args()
         try:
             nome = args["nome"]
@@ -50,7 +52,8 @@ class Prefeituras(Resource):
             return marshal(message, message_fields), 404
 
 class PrefeituraById(Resource):
-    def get(self, id):
+    @token_verifica
+    def get(self, refresh_token, token_tipo, id):
         prefeitura = Prefeitura.query.get(id)
 
         if prefeitura is None:
@@ -62,7 +65,8 @@ class PrefeituraById(Resource):
         logger.info(f"Prefeitura {id} encontrado com sucesso!")
         return marshal(prefeitura, prefeitura_fields)
 
-    def put(self, id):
+    @token_verifica
+    def put(self, refresh_token, token_tipo, id):
         args = parser.parse_args()
 
         try:
@@ -88,7 +92,8 @@ class PrefeituraById(Resource):
             message = Message("Error ao atualizar a Uf", 2)
             return marshal(message, message_fields), 404
 
-    def delete(self, id):
+    @token_verifica
+    def delete(self, refresh_token,token_tipo, id):
         prefeitura = Prefeitura.query.get(id)
 
         if prefeitura is None:

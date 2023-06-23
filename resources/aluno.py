@@ -21,12 +21,12 @@ parser.add_argument('id_instituicao_ensino', type=int, help='Problema na faculda
 
 class Alunos(Resource):
     @token_verifica
-    def get(self,refresh_token):
+    def get(self, refresh_token, token_tipo):
         logger.info("Alunos listados com sucesso!")
         alunos = Aluno.query.all()
         return marshal(alunos, aluno_fields), 200
 
-    def post(self):
+    def post(self, refresh_token, token_tipo):
         args = parser.parse_args()
         try:
             nome = args["nome"]
@@ -54,7 +54,8 @@ class Alunos(Resource):
             return marshal(message, message_fields), 404
 
 class AlunoById(Resource):
-    def get(self, idPessoa):
+    @token_verifica
+    def get(self, refresh_token, token_tipo, idPessoa):
         aluno = Aluno.query.get(idPessoa)
 
         if aluno is None:
@@ -66,7 +67,8 @@ class AlunoById(Resource):
         logger.info(f"Aluno {idPessoa} encontrado com sucesso!")
         return marshal(aluno, aluno_fields)
 
-    def put(self, idPessoa):
+    @token_verifica
+    def put(self,refresh_token, token_tipo, idPessoa):
         args = parser.parse_args()
 
         try:
@@ -98,7 +100,8 @@ class AlunoById(Resource):
             message = Message("Error ao atualizar o aluno", 2)
             return marshal(message, message_fields), 404
 
-    def delete(self, idPessoa):
+    @token_verifica
+    def delete(self, refresh_token, token_tipo, idPessoa):
         aluno = Aluno.query.get(idPessoa)
 
         if aluno is None:

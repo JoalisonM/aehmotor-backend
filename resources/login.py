@@ -6,7 +6,7 @@ from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
 parser.add_argument('email', type=str, help='Problema no email.', required=True)
-parser.add_argument('senha', type=str, help='`Problema na senha.', required=True)
+parser.add_argument('senha', type=str, help='Problema na senha.', required=True)
 
 class Login(Resource):
     def post(self):
@@ -23,8 +23,8 @@ class Login(Resource):
             codigo_erro = Message(1, "Tente novamente,senha incorreta.")
             return marshal(codigo_erro, message_fields), 404
 
-        print(pessoa.id)
-        token = token_criador.create(pessoa.id)
 
-        return {"token": token}, 200
+        token = token_criador.create(pessoa.tipo)
+
+        return {"chave_de_acesso": token}, 200
 

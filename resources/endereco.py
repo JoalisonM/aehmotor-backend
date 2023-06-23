@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse, marshal
-
+from helpers.auth.token_handler.token_verificador import token_verifica
 from model.endereco import *
 from model.uf import *
 from model.message import *
@@ -17,12 +17,14 @@ parser.add_argument('id_pessoa', type=int, help='Problema no id de pessoa', requ
 
 
 class Enderecos(Resource):
-    def get(self):
+    @token_verifica
+    def get(self, refresh_token, token_tipo):
         logger.info("Endereço listado com sucesso!")
         enderecos = Endereco.query.all()
         return marshal(enderecos, endereco_fields), 200
 
-    def post(self):
+    @token_verifica
+    def post(self, refresh_token, token_tipo):
         args = parser.parse_args()
         try:
             cep = args["cep"]
@@ -47,7 +49,8 @@ class Enderecos(Resource):
             return marshal(message, message_fields), 404
 
 class EnderecoById(Resource):
-    def get(self, id):
+    @token_verifica
+    def get(self, refresh_token, token_tipo, id):
         endereco = Endereco.query.get(id)
 
         if endereco is None:
@@ -59,7 +62,8 @@ class EnderecoById(Resource):
         logger.info(f"Endereço {id} encontrado com sucesso!")
         return marshal(endereco, endereco_fields)
 
-    def put(self,id):
+    @token_verifica
+    def put(self, refresh_token, token_tipo, id):
         args = parser.parse_args()
 
         try:
@@ -88,7 +92,8 @@ class EnderecoById(Resource):
             message = Message("Erro ao atualizar o endereço", 2)
             return marshal(message, message_fields), 404
 
-    def delete(self,id):
+    @token_verifica
+    def delete(self, refresh_token, token_tipo, id):
         endereco = Endereco.query.get(id)
 
         if endereco is None:

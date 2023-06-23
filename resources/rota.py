@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse, marshal
-
+from helpers.auth.token_handler.token_verificador import token_verifica
 from model.instituicaoEnsino import *
 from model.prefeitura import *
 from model.motorista import *
@@ -23,12 +23,14 @@ parser.add_argument('horario_chegada', type=str, help='Problema no horario da en
 
 
 class Rotas(Resource):
-    def get(self):
+    @token_verifica
+    def get(self, refresh_token, token_tipo):
         logger.info("Ufs listados com sucesso!")
         rotas = Rota.query.all()
         return marshal(rotas, rota_fields), 200
 
-    def post(self):
+    @token_verifica
+    def post(self, refresh_token, token_tipo):
         args = parser.parse_args()
         try:
             id_motorista = args["id_motorista"]
@@ -59,7 +61,8 @@ class Rotas(Resource):
             return marshal(message, message_fields), 404
 
 class RotaById(Resource):
-    def get(self, id):
+    @token_verifica
+    def get(self, refresh_token,token_tipo, id):
         rota = rota.query.get(id)
 
         if rota is None:
@@ -71,7 +74,8 @@ class RotaById(Resource):
         logger.info(f"Rota {id} encontrado com sucesso!")
         return marshal(rota, rota_fields)
 
-    def put(self, id):
+    @token_verifica
+    def put(self, refresh_token, token_tipo, id):
         args = parser.parse_args()
 
         try:
@@ -103,7 +107,8 @@ class RotaById(Resource):
             message = Message("Error ao atualizar a Uf", 2)
             return marshal(message, message_fields), 404
 
-    def delete(self, id):
+    @token_verifica
+    def delete(self, refresh_token, token_tipo,id):
         rota = Rota.query.get(id)
 
         if rota is None:
