@@ -1,11 +1,12 @@
 from flask_restful import fields
 from helpers.database import db
+from model.endereco import endereco_fields
 
 prefeitura_fields={
   'id': fields.Integer,
   'nome': fields.String,
   'secretario': fields.Integer,
-  'id_endereco': fields.Integer,
+  'endereco': fields.Nested(endereco_fields)
 }
 
 class Prefeitura(db.Model):
@@ -25,4 +26,4 @@ class Prefeitura(db.Model):
 
 
   def __repr__(self):
-    return f'<Prefeitura secretario:{self.secreatario}>'
+    return f'<Prefeitura secretario:{self.secretario}>'

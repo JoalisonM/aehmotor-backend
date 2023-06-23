@@ -97,3 +97,16 @@ class UfById(Resource):
 
         message = Message("Uf deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+
+class UfByNome(Resource):
+    def get(self, nome):
+        uf = Uf.query.filter_by(nome=nome).all()
+
+        if uf is None:
+            logger.error(f"Uf {id} não encontrado")
+
+            message = Message(f"Uf {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Uf {id} encontrado com sucesso!")
+        return marshal(uf, uf_fields), 200    
