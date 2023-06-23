@@ -102,3 +102,16 @@ class PessoaById(Resource):
 
         message = Message("Pessoa deletada com sucesso!", 3)
         return marshal(message, message_fields), 200
+
+class PessoaByNome(Resource):
+    def get(self, nome):
+        pessoa = Pessoa.query.filter_by(nome=nome).all()
+
+        if pessoa is None:
+            logger.error(f"Pessoa {id} não encontrado")
+
+            message = Message(f"Pessoa {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Pessoa {id} encontrado com sucesso!")
+        return marshal(pessoa, pessoa_fields), 200

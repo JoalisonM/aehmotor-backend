@@ -1,3 +1,4 @@
+from sqlalchemy import or_
 from flask_restful import Resource, reqparse, marshal
 from helpers.auth.token_handler.token_verificador import token_verifica
 from model.aluno import *
@@ -58,14 +59,14 @@ class AlunoById(Resource):
     def get(self, refresh_token, token_tipo, idPessoa):
         aluno = Aluno.query.get(idPessoa)
 
-        if aluno is None:
-            logger.error(f"Aluno {idPessoa} não encontrado")
+    #     if aluno is None:
+    #         logger.error(f"Aluno {idPessoa} não encontrado")
 
-            message = Message(f"Aluno {idPessoa} não encontrado", 1)
-            return marshal(message), 404
+    #         message = Message(f"Aluno {idPessoa} não encontrado", 1)
+    #         return marshal(message), 404
 
-        logger.info(f"Aluno {idPessoa} encontrado com sucesso!")
-        return marshal(aluno, aluno_fields)
+    #     logger.info(f"Aluno {idPessoa} encontrado com sucesso!")
+    #     return marshal(aluno, aluno_fields)
 
     @token_verifica
     def put(self,refresh_token, token_tipo, idPessoa):
@@ -114,3 +115,34 @@ class AlunoById(Resource):
 
         message = Message("Aluno deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+
+class AlunoByNome(Resource):
+    def get(self, query):
+        try:
+            queryInt = int(query)
+            alunos = Aluno.query.filter(
+                or_(
+                    Aluno.id_pessoa == queryInt,
+                    Aluno.id_instituicao_ensino == queryInt,
+                    Aluno.telefone == query,
+                    Aluno.matricula == query,
+                )
+            ).all()
+        except ValueError:
+            alunos = Aluno.query.filter(
+                or_(
+                    Aluno.nome.ilike(f"%{query}%"),
+                    Aluno.curso.ilike(f"%{query}%"),
+                    Aluno.email.ilike(f"%{query}%"),
+                    Aluno.turno.ilike(f"%{query}%"),
+                )
+            ).all()
+
+        if not alunos:
+            logger.error(f"Aluno {query} não encontrado")
+
+            message = Message(f"Aluno {query} não encontrado", 1)
+            return marshal(message, message_fields), 404
+
+        logger.info(f"Aluno {query} encontrado com sucesso!")
+        return marshal(alunos, aluno_fields), 200

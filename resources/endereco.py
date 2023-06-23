@@ -15,7 +15,6 @@ parser.add_argument('id_cidade', type=int, help='Problema no id de cidade', requ
 parser.add_argument('id_pessoa', type=int, help='Problema no id de pessoa', required=True)
 
 
-
 class Enderecos(Resource):
     @token_verifica
     def get(self, refresh_token, token_tipo):
@@ -35,7 +34,7 @@ class Enderecos(Resource):
             id_cidade = args["id_cidade"]
             id_pessoa = args["id_pessoa"]
 
-            endereco = Endereco(cep, numero, complemento, referencia, logradouro,id_cidade,id_pessoa)
+            endereco = Endereco(cep, numero, complemento, referencia, logradouro, id_cidade, id_pessoa)
 
             db.session.add(endereco)
             db.session.commit()
@@ -106,3 +105,18 @@ class EnderecoById(Resource):
 
         message = Message("Endereço deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+
+class EnderecoByLogradouro(Resource):
+    def get(self, logradouro):
+        endereco = Endereco.query.filter(
+            Endereco.logradouro.ilike(f"%{logradouro}%")
+        ).all()
+
+        if endereco is None:
+            logger.error(f"Endereço {id} não encontrado")
+
+            message = Message(f"Endereço {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Endereço {id} encontrado com sucesso!")
+        return marshal(endereco, endereco_fields), 200

@@ -19,7 +19,7 @@ from helpers.base_logger import logger
 parser = reqparse.RequestParser()
 parser.add_argument('nome', type=str, help='Problema no nome', required=True)
 parser.add_argument('telefone', type=str, help='Problema no telefone', required=True)
-parser.add_argument('id_endereco', type=int, help='Problema no endereço', required=False)
+parser.add_argument('endereco', type=dict, help='Problema no endereço', required=False)
 
 
 class InstituicoesDeEnsino(Resource):
@@ -35,14 +35,28 @@ class InstituicoesDeEnsino(Resource):
         try:
             nome = args["nome"]
             telefone = args["telefone"]
-            id_endereco = args["id_endereco"]
+            enderecoResponse = args["endereco"]
 
-            instituicaoEnsino = InstituicaoEnsino(nome, telefone, id_endereco)
+            #Criar endereço 
+            endereco = Endereco(
+                cep=enderecoResponse["cep"],
+                numero=enderecoResponse["numero"],
+                complemento=enderecoResponse["complemento"],
+                referencia=enderecoResponse["referencia"],
+                logradouro=enderecoResponse["logradouro"],
+                id_cidade=enderecoResponse["id_cidade"],
+                id_pessoa=enderecoResponse["id_pessoa"]
+            )
+
+            db.session.add(endereco)
+            db.session.commit()
+
+            instituicaoEnsino = InstituicaoEnsino(nome, telefone, id_endereco=endereco.id)
 
             db.session.add(instituicaoEnsino)
             db.session.commit()
 
-            logger.info("Instituição cadastrado com sucesso!")
+            logger.info("Instituição de Ensino cadastrado com sucesso!")
 
             return marshal(instituicaoEnsino, instituicaoEnsino_fields), 201
         except Exception as e:
@@ -70,7 +84,7 @@ class InstituicaoDeEnsinoById(Resource):
         args = parser.parse_args()
 
         try:
-            instituicaoEnsino = Aluno.query.get(id)
+            instituicaoEnsino = InstituicaoEnsino.query.get(id)
 
             if instituicaoEnsino is None:
                 logger.error(f"Instituição de Ensino {id} não encontrado")
@@ -106,3 +120,18 @@ class InstituicaoDeEnsinoById(Resource):
 
         message = Message("Instituição de Ensino deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
+    
+class InstituicaoDeEnsinoByNome(Resource):
+    def get(self, nome):
+        instituicaoEnsino = InstituicaoEnsino.query.filter(
+            InstituicaoEnsino.nome.ilike(f"%{nome}%")
+        ).all()
+
+        if instituicaoEnsino is None:
+            logger.error(f"Instituição de Ensino {id} não encontrado")
+
+            message = Message(f"Instituição de Ensino {id} não encontrado", 1)
+            return marshal(message), 404
+
+        logger.info(f"Instituição de Ensino {id} encontrado com sucesso!")
+        return marshal(instituicaoEnsino, instituicaoEnsino_fields), 200
