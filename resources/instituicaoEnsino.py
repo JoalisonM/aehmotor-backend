@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse, marshal
-
+from helpers.auth.token_handler.token_verificador import token_verifica
 from model.aluno import *
 from model.instituicaoEnsino import *
 from model.endereco import *
@@ -23,12 +23,14 @@ parser.add_argument('endereco', type=dict, help='Problema no endereço', require
 
 
 class InstituicoesDeEnsino(Resource):
-    def get(self):
+    @token_verifica
+    def get(self, refresh_token, token_tipo):
         logger.info("Instituições listados com sucesso!")
         instituicoesEnsino = InstituicaoEnsino.query.all()
         return marshal(instituicoesEnsino, instituicaoEnsino_fields), 200
 
-    def post(self):
+    @token_verifica
+    def post(self, refresh_token, token_tipo):
         args = parser.parse_args()
         try:
             nome = args["nome"]
@@ -64,7 +66,8 @@ class InstituicoesDeEnsino(Resource):
             return marshal(message, message_fields), 404
 
 class InstituicaoDeEnsinoById(Resource):
-    def get(self, id):
+    @token_verifica
+    def get(self, refresh_token, token_tipo, id):
         instituicaoEnsino = InstituicaoEnsino.query.get(id)
 
         if instituicaoEnsino is None:
@@ -76,7 +79,8 @@ class InstituicaoDeEnsinoById(Resource):
         logger.info(f"Instituição de Ensino {id} encontrado com sucesso!")
         return marshal(instituicaoEnsino, instituicaoEnsino_fields)
 
-    def put(self, id):
+    @token_verifica
+    def put(self,refresh_token, token_tipo, id):
         args = parser.parse_args()
 
         try:
@@ -102,7 +106,8 @@ class InstituicaoDeEnsinoById(Resource):
             message = Message("Error ao atualizar a Instituição de Ensino", 2)
             return marshal(message, message_fields), 404
 
-    def delete(self, id):
+    @token_verifica
+    def delete(self, refresh_token, token_tipo, id):
         instituicaoEnsino = InstituicaoEnsino.query.get(id)
 
         if instituicaoEnsino is None:
