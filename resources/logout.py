@@ -14,8 +14,7 @@ class Logout(Resource):
 
         try:
             token_puro = request.headers.get("Authorization")
-            #request_data = request.get_json()
-            #token_puro = request_data.get('token')
+
             novo_token = token_puro.split()[1]
             token_informacao = decode(novo_token, key="1234", algorithms="HS256")
             token_exp = token_informacao['exp']
@@ -32,7 +31,7 @@ class Logout(Resource):
             message = Message("Autenticação não realizada.", 1)
 
             return marshal(message, message_fields), 400
-        """except:
+        except:
             message = Message("Erro no logout", 2)
 
-            return marshal(message, message_fields), 400"""
+            return marshal(message, message_fields), 400
