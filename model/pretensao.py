@@ -11,7 +11,7 @@ pretencao_fields = {
 }
 
 
-class Pretencao(db.Model):
+class Pretensao(db.Model):
     __tablename__ = "pretencao"
 
     # SQL
@@ -36,4 +36,4 @@ class Pretencao(db.Model):
         self.data_embarque = data_embarque
 
     def __repr__(self):
-        return f'<Pretencao viagem={self.viagem}, aluno={self.aluno}>'
+        return f'<Pretensao viagem={self.viagem}, aluno={self.aluno}>'
