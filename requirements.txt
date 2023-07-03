@@ -13,4 +13,5 @@ Flask-Cors==3.0.10
 Flask-SQLAlchemy==3.0.3
 Flask-Migrate==4.0.4
 python-dotenv==1.0.0
+flask-mail==0.9.1
 # psycopg2==2.9.6

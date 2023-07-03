@@ -18,11 +18,15 @@ from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
 parser.add_argument('nome', type=str, help='Problema no nome', required=True)
-parser.add_argument('sigla', type=str, help='Problema no telefone', required=True)
+parser.add_argument('sigla', type=str, help='Problema no sigla', required=True)
+"""parser.add_argument('latitude', type=float, help='Problema no latitude', required=True)
+parser.add_argument('longitude', type=float, help='Problema no longitude', required=True)
+parser.add_argument('regiao', type=str, help='Problema no região', required=True)"""
+
 
 class Ufs(Resource):
     def get(self):
-        logger.info("Ufs listados com sucesso!")
+        logger.info("Ufs listadas com sucesso!")
         ufs = Uf.query.all()
         return marshal(ufs, uf_fields), 200
 
@@ -31,6 +35,9 @@ class Ufs(Resource):
         try:
             nome = args["nome"]
             sigla = args["sigla"]
+            #latitude = args["latitude"]
+            #longitude = args["longitude"]
+            #regiao = args["regiao"]
 
             uf = Uf(nome, sigla)
 

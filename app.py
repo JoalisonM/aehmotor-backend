@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from flask_restful import Api
 from flask import Flask, Blueprint
 
+
 from helpers.cors import cors
 from helpers.database import db, migrate
 from resources.motorista import Motoristas, MotoristaById, MotoristaByNome
@@ -16,7 +17,9 @@ from resources.uf import Ufs, UfById, UfByNome
 from resources.instituicaoEnsino import InstituicoesDeEnsino, InstituicaoDeEnsinoById, InstituicaoDeEnsinoByNome
 from resources.funcionario import Funcionarios, FuncionarioById, FuncionarioByNome
 from resources.rota import Rotas, RotaById, RotaByNome
-from resources.prefeitura import Prefeituras, PrefeituraById, PrefeituraByNome
+from resources.prefeitura import Prefeituras, PrefeituraById
+from resources.notificacao import EnviarEmailResource
+
 
 load_dotenv()
 
@@ -33,6 +36,7 @@ postgresPassword = os.getenv("POSTGRES_PASSWORD")
 DB_URL = f"postgresql://{postgresUser}:{postgresPassword}@localhost:5432/aehmotor"
 app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 # initialize the app with the extension
 db.init_app(app)
@@ -74,7 +78,8 @@ api.add_resource(RotaById, '/rotas/<int:id>')
 api.add_resource(RotaByNome,'/rotas/<nome>')
 api.add_resource(Prefeituras, '/prefeituras')
 api.add_resource(PrefeituraById, '/prefeituras/<int:id>')
-api.add_resource(PrefeituraByNome,'/prefeituras/<nome>')
+api.add_resource(EnviarEmailResource, '/enviar_email')
+
 
 
 # Blueprints para Restful
