@@ -23,7 +23,7 @@ from resources.pessoa import Pessoas, PessoaById, PessoaByNome, PessoaMe
 from resources.uf import Ufs, UfById, UfByNome
 from resources.instituicaoEnsino import InstituicoesDeEnsino, InstituicaoDeEnsinoById, InstituicaoDeEnsinoByNome
 from resources.funcionario import Funcionarios, FuncionarioById, FuncionarioByNome
-from resources.rota import Rotas, RotaById, RotaByNome
+from resources.rota import Rotas, RotaById, RotaByCidadeDestino
 from resources.prefeitura import Prefeituras, PrefeituraById
 from resources.notificacao import EnviarEmailResource
 

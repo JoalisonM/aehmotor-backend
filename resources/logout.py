@@ -9,8 +9,8 @@ from helpers.database import db
 from helpers.auth.token_handler.token_verificador import token_verifica
 
 class Logout(Resource):
-    @token_verifica
-    def post(self, id, token):
+   # @token_verifica
+    def post(self):
 
         try:
             token_puro = request.headers.get("Authorization")
