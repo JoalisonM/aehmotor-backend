@@ -1,16 +1,26 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from flask import Flask, request
+from flask import request
 from flask_restful import Resource
+from helpers.auth.token_handler.token_verificador import token_verifica
+from helpers.database import db
+from model.aluno import *
+from model.motorista import * 
+from model.viagem import *
+from model.pretensao import *
 
 class EnviarEmailResource(Resource):
-    def post(self):
+    @token_verifica
+    def post(self, refresh_token, token_id):
         # Obter dados do formulário da solicitação POST
-        data = request.get_json()
-        #ome = data.get('nome')
-        destinatarios = data.get('destinatarios')
-        mensagem = data.get('mensagem')
+        #nome = data.get('nome')
+        destinatarios = db.session.query(Aluno.email)\
+            .join(Motorista, Motorista.id_funcionario==Viagem.id_funcionario)\
+            .join(Viagem, Viagem.id==Pretensao.id_viagem)\
+            .join(Pretensao, Pretensao.id_aluno==Aluno.id_pessoa)\
+            .filter(Motorista.id_funcionario==token_id).all()
+        mensagem = "Ei, o ônibus chegou !!!"
 
         if not all([destinatarios, mensagem]):
             return {'message': 'Erro: Todos os campos são obrigatórios'}, 400
@@ -28,7 +38,6 @@ def enviar_email(destinatarios, mensagem):
     assunto = 'Aehmotor'
     corpo = f'{mensagem}'
 
-    
 
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
         server.starttls()
