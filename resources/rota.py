@@ -5,21 +5,23 @@ from model.prefeitura import *
 from model.motorista import *
 from model.veiculo import *
 from model.rota import *
+from model.viagem import *
 from model.message import *
+from model.rotaInstituicaoEnsino import *
 from helpers.database import db
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
 parser.add_argument('id_motorista', type=str, help='Problema no id do motorista', required=True)
 parser.add_argument('id_veiculo', type=str, help='Problema no id do veiculo', required=True)
-parser.add_argument('id_instituicao_ensino', type=str, help='Problema no id do instituicao', required=True)
 parser.add_argument('id_prefeitura', type=str, help='Problema no id do prefeitura', required=True)
 parser.add_argument('cidade_origem', type=str, help='Problema na cidade de origem', required=True)
 parser.add_argument('cidade_destino', type=str, help='Problema na cidade de destino', required=True)
 parser.add_argument('qtd_alunos', type=str, help='Problema na quantidade de alunos', required=True)
 parser.add_argument('horario_saida', type=str, help='Problema no horario da saida', required=True)
 parser.add_argument('horario_chegada', type=str, help='Problema no horario da entrada', required=True)
-
+parser.add_argument('turno', type=str, help='Problema no turno', required=True)
+parser.add_argument('instituicoes_ensino', type=str, help='Problema nas instituicoes ensino', required=True)
 
 
 class Rotas(Resource):
@@ -35,30 +37,37 @@ class Rotas(Resource):
         try:
             id_motorista = args["id_motorista"]
             id_veiculo = args["id_veiculo"]
-            id_instituicao_ensino = args["id_instituicao_ensino"]
             id_prefeitura = args["id_prefeitura"]
             cidade_origem = args["cidade_origem"]
             cidade_destino = args["cidade_destino"]
             qtd_alunos = args["qtd_alunos"]
             horario_saida = args["horario_saida"]
             horario_chegada = args["horario_chegada"]
+            instituicoes_ensino = [int(id) for id in args['instituicoes_ensino'].split(',')]
+            turno = args["turno"]
 
-            rota = Rota(id_motorista, id_veiculo, id_instituicao_ensino,
+            rota = Rota(id_motorista, id_veiculo,
                         id_prefeitura, cidade_origem, cidade_destino,
-                        qtd_alunos, horario_saida, horario_chegada
+                        qtd_alunos, horario_saida, horario_chegada,turno
             )
 
             db.session.add(rota)
             db.session.commit()
 
+            for id_instituicao in instituicoes_ensino:
+                rota_instituicao = RotaInstituicaoEnsino(rota.id, id_instituicao)
+
+                db.session.add(rota_instituicao)
+                db.session.commit()
+
             logger.info("Rota cadastrada com sucesso!")
 
             return marshal(rota, rota_fields), 201
         except Exception as e:
-            logger.error(f"error: {e}")
+                logger.error(f"error: {e}")
 
-            message = Message("Erro ao cadastrar a rota", 2)
-            return marshal(message, message_fields), 404
+                message = Message("Erro ao cadastrar a rota", 2)
+                return marshal(message, message_fields), 404
 
 class RotaById(Resource):
     @token_verifica
@@ -88,13 +97,14 @@ class RotaById(Resource):
 
             rota.id_motorista = args["id_motorista"]
             rota.id_veiculo = args["id_veiculo"]
-            rota.id_instituicao_ensino = args["id_instituicao_ensino"]
+            rota.instituicoes_ensino = args["instituicoes_ensino"]
             rota.id_prefeitura = args["id_prefeitura"]
             rota.cidade_origem = args["cidade_origem"]
             rota.cidade_destino = args["cidade_destino"]
             rota.qtd_alunos = args["qtd_alunos"]
             rota.horario_saida = args["horario_saida"]
             rota.horario_chegada = args["horario_chegada"]
+            rota.turno = args["turno"]
 
             db.session.add(rota)
             db.session.commit()
@@ -112,14 +122,14 @@ class RotaById(Resource):
         rota = Rota.query.get(id)
 
         if rota is None:
-            logger.error(f"Rota {id} não encontrado")
-            message = Message(f"Rota {id} não encontrado", 1)
+            logger.error(f"Rota {id} não encontrada")
+            message = Message(f"Rota {id} não encontrada", 1)
             return marshal(message, message_fields)
 
         db.session.delete(rota)
         db.session.commit()
 
-        message = Message("Rota deletado com sucesso!", 3)
+        message = Message("Rota deletada com sucesso!", 3)
         return marshal(message, message_fields), 200
 
 class RotaByCidadeDestino(Resource):

@@ -2,9 +2,11 @@ from sqlalchemy import or_
 from flask_restful import Resource, reqparse, marshal
 from helpers.auth.token_handler.token_verificador import token_verifica
 from model.aluno import *
+from model.rota import *
 from model.instituicaoEnsino import *
 from model.passageiro import *
 from model.message import *
+from model.pretensao import *
 from helpers.database import db
 from helpers.base_logger import logger
 
@@ -27,7 +29,7 @@ class Alunos(Resource):
         alunos = Aluno.query.all()
         return marshal(alunos, aluno_fields), 200
 
-    def post(self, refresh_token, token_tipo):
+    def post(self):
         args = parser.parse_args()
         try:
             nome = args["nome"]
@@ -59,14 +61,14 @@ class AlunoById(Resource):
     def get(self, refresh_token, token_tipo, idPessoa):
         aluno = Aluno.query.get(idPessoa)
 
-    #     if aluno is None:
-    #         logger.error(f"Aluno {idPessoa} não encontrado")
+        if aluno is None:
+            logger.error(f"Aluno {idPessoa} não encontrado")
 
-    #         message = Message(f"Aluno {idPessoa} não encontrado", 1)
-    #         return marshal(message), 404
+            message = Message(f"Aluno {idPessoa} não encontrado", 1)
+            return marshal(message), 404
 
-    #     logger.info(f"Aluno {idPessoa} encontrado com sucesso!")
-    #     return marshal(aluno, aluno_fields)
+        logger.info(f"Aluno {idPessoa} encontrado com sucesso!")
+        return marshal(aluno, aluno_fields)
 
     @token_verifica
     def put(self,refresh_token, token_tipo, idPessoa):
@@ -101,6 +103,35 @@ class AlunoById(Resource):
             message = Message("Error ao atualizar o aluno", 2)
             return marshal(message, message_fields), 404
 
+
+    def patch(self, refresh_token, token_id, idPessoa):
+        args = parser.parse_args()
+
+        try:
+            aluno = Aluno.query.get(idPessoa)
+
+            if aluno is None:
+                logger.error(f"Aluno {idPessoa} não encontrado")
+                message = Message(f"Aluno {idPessoa} não encontrado", 1)
+                return marshal(message, message_fields)
+
+            aluno.matricula = args["matricula"]
+            aluno.curso = args["curso"]
+            aluno.turno = args["turno"]
+            aluno.id_instituicao_ensino = args["id_instituicao_ensino"]
+
+            db.session.add(aluno)
+            db.session.commit()
+
+            logger.info("Aluno cadastrado com sucesso!")
+            return marshal(aluno, aluno_fields), 200
+        except Exception as e:
+            logger.error(f"error: {e}")
+
+            message = Message("Error ao atualizar o aluno", 2)
+            return marshal(message, message_fields), 404
+
+
     @token_verifica
     def delete(self, refresh_token, token_tipo, idPessoa):
         aluno = Aluno.query.get(idPessoa)
@@ -119,11 +150,8 @@ class AlunoById(Resource):
 class AlunoByNome(Resource):
     def get(self, query):
         try:
-            queryInt = int(query)
             alunos = Aluno.query.filter(
                 or_(
-                    Aluno.id_pessoa == queryInt,
-                    Aluno.id_instituicao_ensino == queryInt,
                     Aluno.telefone == query,
                     Aluno.matricula == query,
                 )

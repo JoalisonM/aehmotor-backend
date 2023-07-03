@@ -1,7 +1,10 @@
 from flask_restful import Resource,reqparse, marshal
 from helpers.auth.token_handler.token_verificador import token_verifica
 from model.veiculo import*
+from model.viagem import *
 from model.message import*
+from model.rota import *
+from model.motorista import *
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
@@ -13,7 +16,7 @@ parser.add_argument('placa', type=str, help='Problema na placa do veículo',requ
 
 class Veiculos(Resource):
     @token_verifica
-    def get(self, refresh_token):
+    def get(self, refresh_token, token_tipo):
         logger.info("Veículos listados com sucesso!")
         veiculos = Veiculo.query.all()
         return marshal(veiculos, veiculo_fields), 200
@@ -99,7 +102,8 @@ class VeiculoById(Resource):
         return marshal(message, message_fields), 200
 
 class VeiculoByPlaca(Resource):
-    def get(self, placa):
+    @token_verifica
+    def get(self, refresh_token, token_tipo, placa):
         veiculo = Veiculo.query.filter(
             Veiculo.placa.ilike(f"%{placa}%")
         ).all()
@@ -111,4 +115,4 @@ class VeiculoByPlaca(Resource):
             return marshal(message), 404
 
         logger.info(f"Veículo {id} encontrado com sucesso!")
-        return marshal(veiculo, veiculo_fields), 200    
+        return marshal(veiculo, veiculo_fields), 200

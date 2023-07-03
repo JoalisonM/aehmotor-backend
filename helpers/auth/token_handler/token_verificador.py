@@ -21,6 +21,7 @@ def token_verifica(function: callable) -> callable:
             token = token_puro.split()[1]
             token_informacao = decode(
             token, key='1234', algorithms="HS256")
+            token_id = token_informacao["id"]
             token_tipo = token_informacao["tipo"]
 
         except InvalidSignatureError:
@@ -46,7 +47,7 @@ def token_verifica(function: callable) -> callable:
 
         next_token = token_criador.refresh(token)
 
-        return function( *args, next_token, token_tipo, **kwargs)
+        return function( *args, next_token, token_id, **kwargs)
 
     return  decorated
 

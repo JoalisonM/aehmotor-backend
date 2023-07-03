@@ -3,8 +3,6 @@ from helpers.database import db
 from model.funcionario import Funcionario
 from model.endereco import Endereco
 
-
-
 motorista_fields = {
   'id': fields.Integer,
   'nome': fields.String,
@@ -21,6 +19,8 @@ class Motorista(Funcionario):
 
   id_funcionario = db.Column(db.Integer ,db.ForeignKey("funcionario.id_pessoa"), primary_key=True)
   id_veiculo = db.Column(db.Integer, db.ForeignKey("veiculo.id"))
+
+  viagem = db.relationship("Viagem", uselist=False, backref="motorista")
 
   __mapper_args__ = {"polymorphic_identity": "motorista"}
 

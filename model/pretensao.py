@@ -4,17 +4,20 @@ from helpers.database import db
 from model.viagem import viagem_fields
 from model.aluno import aluno_fields
 
-pretencao_fields = {
+pretensao_fields = {
     'id': fields.Integer,
     'viagem': fields.Nested(viagem_fields),
     'aluno': fields.Nested(aluno_fields),
+    'embarque': fields.Boolean,
+    'data_embarque': fields.String,
+    'criacao':fields.String
 }
 
 
 class Pretensao(db.Model):
-    __tablename__ = "pretencao"
+    __tablename__ = "pretensao"
 
-    # SQL
+
     id = db.Column(db.Integer, primary_key=True)
     id_viagem = db.Column(db.Integer, db.ForeignKey('viagem.id'))
     id_aluno = db.Column(db.Integer, db.ForeignKey('aluno.id_pessoa'))
@@ -25,13 +28,10 @@ class Pretensao(db.Model):
     criacao = db.Column(db.DateTime, nullable=False,
                         default=datetime.datetime.utcnow)
 
-    # OO
-    viagem = db.relationship("Viagem", uselist=False)
-    aluno = db.relationship("Aluno", uselist=False)
 
-    def __init__(self, viagem, aluno, embarque, data_embarque):
-        self.viagem = viagem
-        self.aluno = aluno
+    def __init__(self, id_viagem, id_aluno, embarque, data_embarque):
+        self.id_viagem = id_viagem
+        self.id_aluno = id_aluno
         self.embarque = embarque
         self.data_embarque = data_embarque
 

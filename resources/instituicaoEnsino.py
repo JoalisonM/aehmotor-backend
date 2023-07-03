@@ -13,6 +13,7 @@ from model.pessoa import *
 from model.veiculo import *
 from model.rota import *
 from model.message import *
+from model.rotaInstituicaoEnsino import *
 from helpers.database import db
 from helpers.base_logger import logger
 
@@ -120,7 +121,7 @@ class InstituicaoDeEnsinoById(Resource):
 
         message = Message("Instituição de Ensino deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
-    
+
 class InstituicaoDeEnsinoByNome(Resource):
     def get(self, nome):
         instituicaoEnsino = InstituicaoEnsino.query.filter(

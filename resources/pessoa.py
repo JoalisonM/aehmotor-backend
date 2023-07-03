@@ -21,8 +21,7 @@ class Pessoas(Resource):
         pessoas = Pessoa.query.all()
         return marshal(pessoas, pessoa_fields), 200
 
-    @token_verifica
-    def post(self, refresh_token,token_tipo):
+    def post(self):
         args = parser.parse_args()
         try:
             nome = args["nome"]
@@ -114,4 +113,18 @@ class PessoaByNome(Resource):
             return marshal(message), 404
 
         logger.info(f"Pessoa {id} encontrado com sucesso!")
+        return marshal(pessoa, pessoa_fields), 200
+
+class PessoaMe(Resource):
+    @token_verifica
+    def get(self, refresh_token, token_id):
+        pessoa = Pessoa.query.get(token_id)
+
+        if pessoa is None:
+            logger.error(f"Pessoa {id} não encontrada")
+
+            message = Message(f"Pessoa {id} não encontrada", 1)
+            return marshal(message), 404
+
+        logger.info(f"Pessoa {id} encontrada com sucesso!")
         return marshal(pessoa, pessoa_fields), 200
