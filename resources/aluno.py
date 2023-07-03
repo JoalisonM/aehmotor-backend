@@ -5,6 +5,7 @@ from model.aluno import *
 from model.instituicaoEnsino import *
 from model.passageiro import *
 from model.message import *
+from model.pretensao import *
 from helpers.database import db
 from helpers.base_logger import logger
 
@@ -27,7 +28,7 @@ class Alunos(Resource):
         alunos = Aluno.query.all()
         return marshal(alunos, aluno_fields), 200
 
-    def post(self, refresh_token, token_tipo):
+    def post(self):
         args = parser.parse_args()
         try:
             nome = args["nome"]

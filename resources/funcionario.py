@@ -21,8 +21,8 @@ class Funcionarios(Resource):
         funcionarios = Funcionario.query.all()
         return marshal(funcionarios, funcionario_fields), 200
 
-    @token_verifica
-    def post(self, refresh_token, token_tipo):
+
+    def post(self):
         args = parser.parse_args()
         try:
             nome = args["nome"]

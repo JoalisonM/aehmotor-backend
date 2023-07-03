@@ -6,6 +6,8 @@ from helpers.cors import cors
 from helpers.database import db, migrate
 from resources.logout import Logout
 from resources.login import Login
+from resources.pretensao import Pretensoes,PretensaoById
+from resources.viagem import Viagens,ViagemById
 from resources.motorista import Motoristas, MotoristaById
 from resources.veiculo import Veiculos, VeiculoById
 from resources.motorista import Motoristas, MotoristaById, MotoristaByNome
@@ -43,6 +45,10 @@ cors.init_app(app)
 migrate.init_app(app, db)
 
 
+api.add_resource(PretensaoById,'/pretensoes/<int:id>')
+api.add_resource(Pretensoes, '/pretensoes')
+api.add_resource(Viagens, '/viagens')
+api.add_resource(ViagemById, '/viagens/<int:id>')
 api.add_resource(Logout, '/logout')
 api.add_resource(Login, '/login')
 api.add_resource(Motoristas,'/motoristas')
@@ -54,7 +60,7 @@ api.add_resource(VeiculoByPlaca,'/veiculos/<placa>')
 api.add_resource(Passageiros, '/passageiros')
 api.add_resource(PassageiroById,'/passageiros/<int:id>')
 api.add_resource(Alunos, '/alunos')
-# api.add_resource(AlunoById, '/alunos/<int:idPessoa>')
+api.add_resource(AlunoById, '/alunos/<int:idPessoa>')
 api.add_resource(AlunoByNome,'/alunos/<query>')
 api.add_resource(Pessoas, '/pessoas')
 api.add_resource(PessoaById, '/pessoas/<int:id>')

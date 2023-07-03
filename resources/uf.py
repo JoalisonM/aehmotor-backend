@@ -114,4 +114,4 @@ class UfByNome(Resource):
             return marshal(message), 404
 
         logger.info(f"Uf {id} encontrado com sucesso!")
-        return marshal(uf, uf_fields), 200    
+        return marshal(uf, uf_fields), 200

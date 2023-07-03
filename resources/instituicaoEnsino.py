@@ -120,7 +120,7 @@ class InstituicaoDeEnsinoById(Resource):
 
         message = Message("Instituição de Ensino deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
-    
+
 class InstituicaoDeEnsinoByNome(Resource):
     def get(self, nome):
         instituicaoEnsino = InstituicaoEnsino.query.filter(
