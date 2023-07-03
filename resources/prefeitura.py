@@ -29,8 +29,8 @@ class Prefeituras(Resource):
         prefeituras = Prefeitura.query.all()
         return marshal(prefeituras, prefeitura_fields), 200
 
-    @token_verifica
-    def post(self, refresh_token, token_tipo):
+    #@token_verifica
+    def post(self):
         args = parser.parse_args()
         try:
             nome = args["nome"]
