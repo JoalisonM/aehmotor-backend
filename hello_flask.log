@@ -1,18 +1,7 @@
-2023-06-23 16:24:03,665 WARNING _internal _log  * Debugger is active!
-2023-06-23 16:24:03,678 INFO _internal _log  * Debugger PIN: 724-239-092
-2023-06-23 16:24:11,929 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:11] "[31m[1mPOST /api/logout HTTP/1.1[0m" 401 -
-2023-06-23 16:24:16,635 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:16] "[31m[1mGET /api/alunos HTTP/1.1[0m" 401 -
-2023-06-23 16:24:25,326 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:25] "POST /api/login HTTP/1.1" 200 -
-2023-06-23 16:24:42,436 INFO aluno get Alunos listados com sucesso!
-2023-06-23 16:24:42,447 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:42] "GET /api/alunos HTTP/1.1" 200 -
-2023-06-23 16:24:52,492 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:52] "POST /api/logout HTTP/1.1" 200 -
-2023-06-23 16:24:57,836 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:24:57] "[31m[1mGET /api/alunos HTTP/1.1[0m" 401 -
-2023-06-23 16:26:10,073 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:10] "[31m[1mPOST /api/cidades HTTP/1.1[0m" 400 -
-2023-06-23 16:26:15,592 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:15] "[31m[1mGET /api/cidades HTTP/1.1[0m" 401 -
-2023-06-23 16:26:26,901 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:26] "[31m[1mGET /api/pessoas HTTP/1.1[0m" 401 -
-2023-06-23 16:26:37,204 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:37] "[31m[1mGET /api/cidades HTTP/1.1[0m" 401 -
-2023-06-23 16:26:41,305 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:26:41] "[31m[1mPUT /api/cidades/7 HTTP/1.1[0m" 400 -
-2023-06-23 16:27:32,009 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:27:32] "[31m[1mGET /api/pessoas HTTP/1.1[0m" 401 -
-2023-06-23 16:27:47,145 INFO _internal _log 127.0.0.1 - - [23/Jun/2023 16:27:47] "[31m[1mGET /api/cidades HTTP/1.1[0m" 401 -
-2023-06-20 21:11:18,714 WARNING _internal _log  * Debugger is active!
-2023-06-20 21:11:18,773 INFO _internal _log  * Debugger PIN: 458-736-514
+2023-07-03 01:09:55,528 WARNING _internal _log  * Debugger is active!
+2023-07-03 01:09:55,543 INFO _internal _log  * Debugger PIN: 724-239-092
+2023-07-03 01:12:02,981 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:02] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -
+2023-07-03 01:12:26,979 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:26] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -
+2023-07-03 01:12:43,973 INFO viagem get Viagens listadas com sucesso!
+2023-07-03 01:12:44,014 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:44] "GET /api/viagens HTTP/1.1" 200 -
+2023-07-03 01:12:48,738 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:48] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -

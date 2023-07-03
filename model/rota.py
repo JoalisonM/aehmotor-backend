@@ -11,6 +11,7 @@ rota_fields ={
   'qtd_alunos':fields.Integer,
   'horario_saida':fields.String,
   'horario_chegada':fields.String,
+  'turno': fields.String
 }
 
 class Rota(db.Model):
@@ -24,10 +25,13 @@ class Rota(db.Model):
   qtd_alunos = db.Column(db.Integer, nullable=False)
   horario_saida = db.Column(db.Time, nullable=False)
   horario_chegada = db.Column(db.Time, nullable=False)
+  turno = db.Column(db.String(20), nullable=False)
+
+  viagem = db.relationship("Viagem", uselist=False, backref="rota")
 
   def __init__(self, id_motorista, id_veiculo,
                id_prefeitura, cidade_origem, cidade_destino, qtd_alunos,
-               horario_saida, horario_chegada
+               horario_saida, horario_chegada,turno
   ):
       self.cidade_origem=cidade_origem
       self.cidade_destino=cidade_destino
@@ -37,6 +41,7 @@ class Rota(db.Model):
       self.horario_saida=horario_saida
       self.horario_chegada=horario_chegada
       self.id_prefeitura=id_prefeitura
+      self.turno = turno
 
   def __repr__(self):
       return f'<Rota>'

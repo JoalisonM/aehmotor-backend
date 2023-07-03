@@ -4,6 +4,7 @@ from model.funcionario import*
 from model.motorista import *
 from model.pessoa import *
 from model.message import *
+from model.viagem import *
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()

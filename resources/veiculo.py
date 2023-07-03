@@ -1,7 +1,10 @@
 from flask_restful import Resource,reqparse, marshal
 from helpers.auth.token_handler.token_verificador import token_verifica
 from model.veiculo import*
+from model.viagem import *
 from model.message import*
+from model.rota import *
+from model.motorista import *
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
@@ -112,4 +115,4 @@ class VeiculoByPlaca(Resource):
             return marshal(message), 404
 
         logger.info(f"Veículo {id} encontrado com sucesso!")
-        return marshal(veiculo, veiculo_fields), 200    
+        return marshal(veiculo, veiculo_fields), 200
