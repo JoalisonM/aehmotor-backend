@@ -1,2 +1,9 @@
 2023-07-03 13:41:40,809 WARNING _internal _log  * Debugger is active!
 2023-07-03 13:41:40,810 INFO _internal _log  * Debugger PIN: 420-060-468
+2023-07-03 01:09:55,528 WARNING _internal _log  * Debugger is active!
+2023-07-03 01:09:55,543 INFO _internal _log  * Debugger PIN: 724-239-092
+2023-07-03 01:12:02,981 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:02] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -
+2023-07-03 01:12:26,979 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:26] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -
+2023-07-03 01:12:43,973 INFO viagem get Viagens listadas com sucesso!
+2023-07-03 01:12:44,014 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:44] "GET /api/viagens HTTP/1.1" 200 -
+2023-07-03 01:12:48,738 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:48] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -

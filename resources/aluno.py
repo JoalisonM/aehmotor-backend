@@ -1,9 +1,12 @@
+from sqlalchemy import or_
 from flask_restful import Resource, reqparse, marshal
-
+from helpers.auth.token_handler.token_verificador import token_verifica
 from model.aluno import *
+from model.rota import *
 from model.instituicaoEnsino import *
 from model.passageiro import *
 from model.message import *
+from model.pretensao import *
 from helpers.database import db
 from helpers.base_logger import logger
 
@@ -20,7 +23,8 @@ parser.add_argument('id_instituicao_ensino', type=int, help='Problema na faculda
 
 
 class Alunos(Resource):
-    def get(self):
+    @token_verifica
+    def get(self, refresh_token, token_tipo):
         logger.info("Alunos listados com sucesso!")
         alunos = Aluno.query.all()
         return marshal(alunos, aluno_fields), 200
@@ -53,7 +57,8 @@ class Alunos(Resource):
             return marshal(message, message_fields), 404
 
 class AlunoById(Resource):
-    def get(self, idPessoa):
+    @token_verifica
+    def get(self, refresh_token, token_tipo, idPessoa):
         aluno = Aluno.query.get(idPessoa)
 
         if aluno is None:
@@ -65,7 +70,8 @@ class AlunoById(Resource):
         logger.info(f"Aluno {idPessoa} encontrado com sucesso!")
         return marshal(aluno, aluno_fields)
 
-    def put(self, idPessoa):
+    @token_verifica
+    def put(self,refresh_token, token_tipo, idPessoa):
         args = parser.parse_args()
 
         try:
@@ -97,7 +103,37 @@ class AlunoById(Resource):
             message = Message("Error ao atualizar o aluno", 2)
             return marshal(message, message_fields), 404
 
-    def delete(self, idPessoa):
+
+    def patch(self, refresh_token, token_id, idPessoa):
+        args = parser.parse_args()
+
+        try:
+            aluno = Aluno.query.get(idPessoa)
+
+            if aluno is None:
+                logger.error(f"Aluno {idPessoa} não encontrado")
+                message = Message(f"Aluno {idPessoa} não encontrado", 1)
+                return marshal(message, message_fields)
+
+            aluno.matricula = args["matricula"]
+            aluno.curso = args["curso"]
+            aluno.turno = args["turno"]
+            aluno.id_instituicao_ensino = args["id_instituicao_ensino"]
+
+            db.session.add(aluno)
+            db.session.commit()
+
+            logger.info("Aluno cadastrado com sucesso!")
+            return marshal(aluno, aluno_fields), 200
+        except Exception as e:
+            logger.error(f"error: {e}")
+
+            message = Message("Error ao atualizar o aluno", 2)
+            return marshal(message, message_fields), 404
+
+
+    @token_verifica
+    def delete(self, refresh_token, token_tipo, idPessoa):
         aluno = Aluno.query.get(idPessoa)
 
         if aluno is None:
@@ -112,14 +148,29 @@ class AlunoById(Resource):
         return marshal(message, message_fields), 200
 
 class AlunoByNome(Resource):
-    def get(self, nome):
-        aluno = Aluno.query.filter_by(nome=nome).first()
+    def get(self, query):
+        try:
+            alunos = Aluno.query.filter(
+                or_(
+                    Aluno.telefone == query,
+                    Aluno.matricula == query,
+                )
+            ).all()
+        except ValueError:
+            alunos = Aluno.query.filter(
+                or_(
+                    Aluno.nome.ilike(f"%{query}%"),
+                    Aluno.curso.ilike(f"%{query}%"),
+                    Aluno.email.ilike(f"%{query}%"),
+                    Aluno.turno.ilike(f"%{query}%"),
+                )
+            ).all()
 
-        if aluno is None:
-            logger.error(f"Aluno {id} não encontrado")
+        if not alunos:
+            logger.error(f"Aluno {query} não encontrado")
 
-            message = Message(f"Aluno {id} não encontrado", 1)
-            return marshal(message), 404
+            message = Message(f"Aluno {query} não encontrado", 1)
+            return marshal(message, message_fields), 404
 
-        logger.info(f"Aluno {id} encontrado com sucesso!")
-        return marshal(aluno, aluno_fields), 200
+        logger.info(f"Aluno {query} encontrado com sucesso!")
+        return marshal(alunos, aluno_fields), 200

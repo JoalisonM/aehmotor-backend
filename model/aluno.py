@@ -26,6 +26,7 @@ class Aluno(Pessoa):
     db.Integer, db.ForeignKey('instituicao_ensino.id'), nullable=True
   )
 
+  pretensao = db.relationship("Pretensao", uselist=False, backref="aluno")
   passageiro = db.relationship("Passageiro", uselist=False, backref="aluno")
 
   __mapper_args__ = {"polymorphic_identity": "aluno"}

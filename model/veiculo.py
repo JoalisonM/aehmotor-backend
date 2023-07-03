@@ -1,6 +1,7 @@
 from flask_restful import fields
 from helpers.database import db
 
+
 veiculo_fields={
   'id':fields.Integer,
   'cidade':fields.String,
@@ -17,6 +18,7 @@ class Veiculo(db.Model):
   placa = db.Column(db.String, nullable=False)
 
   rota = db.relationship("Rota", uselist=False, backref="veiculo")
+  viagem = db.relationship("Viagem", uselist=False, backref="veiculo")
   motorista = db.relationship("Motorista", uselist=False, backref="veiculo")
 
   def __init__(self, cidade, qtd_passageiros, tipo_veiculo, placa):

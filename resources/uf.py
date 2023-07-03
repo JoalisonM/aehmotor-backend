@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse, marshal
-
+from helpers.auth.token_handler.token_verificador import token_verifica
 from model.aluno import *
 from model.instituicaoEnsino import *
 from model.endereco import *
@@ -27,10 +27,14 @@ parser.add_argument('regiao', type=str, help='Problema no região', required=Tru
 class Ufs(Resource):
     def get(self):
         logger.info("Ufs listadas com sucesso!")
+    @token_verifica
+    def get(self, refresh_token, token_tipo):
+        logger.info("Ufs listados com sucesso!")
         ufs = Uf.query.all()
         return marshal(ufs, uf_fields), 200
 
-    def post(self):
+    @token_verifica
+    def post(self, refresh_token, token_tipo):
         args = parser.parse_args()
         try:
             nome = args["nome"]
@@ -54,7 +58,8 @@ class Ufs(Resource):
             return marshal(message, message_fields), 404
 
 class UfById(Resource):
-    def get(self, id):
+    @token_verifica
+    def get(self, refresh_token, token_tipo,id):
         uf = Uf.query.get(id)
 
         if uf is None:
@@ -66,7 +71,8 @@ class UfById(Resource):
         logger.info(f"Instituição de Ensino {id} encontrado com sucesso!")
         return marshal(uf, uf_fields)
 
-    def put(self, id):
+    @token_verifica
+    def put(self, refresh_token,token_tipo,id):
         args = parser.parse_args()
 
         try:
@@ -91,7 +97,8 @@ class UfById(Resource):
             message = Message("Error ao atualizar a Uf", 2)
             return marshal(message, message_fields), 404
 
-    def delete(self, id):
+    @token_verifica
+    def delete(self, refresh_token, token_tipo, id):
         uf = Uf.query.get(id)
 
         if uf is None:
@@ -107,7 +114,7 @@ class UfById(Resource):
 
 class UfByNome(Resource):
     def get(self, nome):
-        uf = Uf.query.filter_by(nome=nome).first()
+        uf = Uf.query.filter_by(nome=nome).all()
 
         if uf is None:
             logger.error(f"Uf {id} não encontrado")
@@ -116,4 +123,4 @@ class UfByNome(Resource):
             return marshal(message), 404
 
         logger.info(f"Uf {id} encontrado com sucesso!")
-        return marshal(uf, uf_fields), 200    
+        return marshal(uf, uf_fields), 200

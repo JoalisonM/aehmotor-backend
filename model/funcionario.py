@@ -1,6 +1,7 @@
 from flask_restful import fields
 from helpers.database import db
 from model.pessoa import Pessoa
+from model.viagem import *
 
 funcionario_fields = {
   'id': fields.Integer,
@@ -13,12 +14,11 @@ funcionario_fields = {
 }
 
 class Funcionario(Pessoa):
-  
+
   __tablename__ = "funcionario"
 
   id_pessoa = db.Column(db.Integer ,db.ForeignKey("pessoa.id"), primary_key=True)
   cargo = db.Column(db.String, nullable=False)
-  
   prefeitura = db.relationship("Prefeitura", uselist=False, backref="funcionario")
 
   __mapper_args__ = {

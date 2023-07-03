@@ -1,9 +1,10 @@
 
 from flask_restful import Resource, reqparse, marshal
-
 from model.pessoa import *
 from model.message import *
 from helpers.base_logger import logger
+from helpers.auth.token_handler.token_verificador import token_verifica
+
 
 parser = reqparse.RequestParser()
 parser.add_argument('nome', type=str, help='Problema no nome', required=True)
@@ -14,7 +15,8 @@ parser.add_argument('senha', type=str, help='Problema na senha', required=True)
 
 
 class Pessoas(Resource):
-    def get(self):
+    @token_verifica
+    def get(self, refresh_token, token_tipo):
         logger.info("Pessoas listadas com sucesso!")
         pessoas = Pessoa.query.all()
         return marshal(pessoas, pessoa_fields), 200
@@ -43,7 +45,8 @@ class Pessoas(Resource):
             return marshal(message, message_fields), 404
 
 class PessoaById(Resource):
-    def get(self, id):
+    @token_verifica
+    def get(self, refresh_token, token_tipo, id):
         pessoa = Pessoa.query.get(id)
 
         if pessoa is None:
@@ -55,7 +58,8 @@ class PessoaById(Resource):
         logger.info(f"Pessoa {id} encontrada com sucesso!")
         return marshal(pessoa, pessoa_fields)
 
-    def put(self, id):
+    @token_verifica
+    def put(self, refresh_token, token_tipo, id):
         args = parser.parse_args()
 
         try:
@@ -83,7 +87,8 @@ class PessoaById(Resource):
             message = Message("Erro ao atualizar pessoa", 2)
             return marshal(message, message_fields), 404
 
-    def delete(self, id):
+    @token_verifica
+    def delete(self, refresh_token,token_tipo, id):
         pessoa = Pessoa.query.get(id)
 
         if pessoa is None:
@@ -99,7 +104,7 @@ class PessoaById(Resource):
 
 class PessoaByNome(Resource):
     def get(self, nome):
-        pessoa = Pessoa.query.filter_by(nome=nome).first()
+        pessoa = Pessoa.query.filter_by(nome=nome).all()
 
         if pessoa is None:
             logger.error(f"Pessoa {id} não encontrado")
@@ -108,4 +113,18 @@ class PessoaByNome(Resource):
             return marshal(message), 404
 
         logger.info(f"Pessoa {id} encontrado com sucesso!")
+        return marshal(pessoa, pessoa_fields), 200
+
+class PessoaMe(Resource):
+    @token_verifica
+    def get(self, refresh_token, token_id):
+        pessoa = Pessoa.query.get(token_id)
+
+        if pessoa is None:
+            logger.error(f"Pessoa {id} não encontrada")
+
+            message = Message(f"Pessoa {id} não encontrada", 1)
+            return marshal(message), 404
+
+        logger.info(f"Pessoa {id} encontrada com sucesso!")
         return marshal(pessoa, pessoa_fields), 200
