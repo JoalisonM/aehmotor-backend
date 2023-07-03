@@ -11,12 +11,10 @@ pretensao_fields = {
     'embarque': fields.Boolean,
     'data_embarque': fields.String,
     'criacao':fields.String
-}
 
 
 class Pretensao(db.Model):
     __tablename__ = "pretensao"
-
 
     id = db.Column(db.Integer, primary_key=True)
     id_viagem = db.Column(db.Integer, db.ForeignKey('viagem.id'))
@@ -27,7 +25,6 @@ class Pretensao(db.Model):
 
     criacao = db.Column(db.DateTime, nullable=False,
                         default=datetime.datetime.utcnow)
-
 
     def __init__(self, id_viagem, id_aluno, embarque, data_embarque):
         self.id_viagem = id_viagem
