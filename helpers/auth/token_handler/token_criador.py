@@ -10,8 +10,8 @@ class TokenCriador:
         self.__REFRESH_TIME_MIN = refresh_time_min
 
 
-    def create(self,tipo:str):
-        return self.__encode_token(tipo)
+    def create(self, tipo:str, id:int):
+        return self.__encode_token(tipo, id)
 
     def refresh(self, token: str):
 
@@ -20,13 +20,13 @@ class TokenCriador:
         exp_time =  token_informacao["exp"]
 
         if ((exp_time - time.time()) /60) < self.__REFRESH_TIME_MIN:
-            print(tipo)
             return self.__enconde_token(tipo)
         return token
 
-    def __encode_token(self,tipo:str):
+    def __encode_token(self, tipo:str, id:int):
        token = jwt.encode({
             'exp': datetime.utcnow() + timedelta(minutes = self.__EXP_TIME_MIN),
+            'id': id,
             'tipo': tipo
         }, key = self.__TOKEN_KEY,algorithm="HS256")
 

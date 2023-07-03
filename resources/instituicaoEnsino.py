@@ -13,6 +13,7 @@ from model.pessoa import *
 from model.veiculo import *
 from model.rota import *
 from model.message import *
+from model.rotaInstituicaoEnsino import *
 from helpers.database import db
 from helpers.base_logger import logger
 

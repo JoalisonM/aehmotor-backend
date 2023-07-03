@@ -16,16 +16,16 @@ class Login(Resource):
         if pessoa is None:
             logger.error(f"A pessoa do email:  {args['email']} não foi encontrado")
 
-            codigo_erro = Message(1, f"Email ou senha inválidos.")
-            return marshal(codigo_erro, message_fields), 404
+            message = Message(f"Email ou senha inválidos.", 1)
+            return marshal(message, message_fields), 404
 
 
         if not pessoa.verificar_senha(args['senha']):
-            codigo_erro = Message(1, "Email ou senha inválidos.")
-            return marshal(codigo_erro, message_fields), 404
+            message = Message("Email ou senha inválidos.", 1)
+            return marshal(message, message_fields), 404
 
 
-        token = token_criador.create(pessoa.tipo)
+        token = token_criador.create(pessoa.tipo, pessoa.id)
         login = LoginModel(token)
-        return marshal(login, login_fields)
+        return marshal(login, login_fields), 200
 

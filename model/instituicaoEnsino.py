@@ -18,7 +18,6 @@ class InstituicaoEnsino(db.Model):
   telefone = db.Column(db.String, nullable=False)
   id_endereco = db.Column(db.Integer, db.ForeignKey('endereco.id'))
 
-  rota = db.relationship("Rota", uselist=False, backref="instituicao_ensino")
   aluno = db.relationship("Aluno", uselist=False, backref="instituicao_ensino")
 
   def __init__(self, nome, telefone, id_endereco):

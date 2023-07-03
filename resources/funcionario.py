@@ -21,8 +21,7 @@ class Funcionarios(Resource):
         funcionarios = Funcionario.query.all()
         return marshal(funcionarios, funcionario_fields), 200
 
-    @token_verifica
-    def post(self, refresh_token, token_tipo):
+    def post(self):
         args = parser.parse_args()
         try:
             nome = args["nome"]
@@ -104,7 +103,7 @@ class FuncionarioById(Resource):
 
         message = Message("Funcionário deletado com sucesso!", 3)
         return marshal(message, message_fields), 200
-    
+
 class FuncionarioByNome(Resource):
     def get(self, nome):
         funcionario = Funcionario.query.filter(

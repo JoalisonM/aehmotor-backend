@@ -6,21 +6,18 @@ rota_fields ={
   'id_veiculo':fields.Integer,
   'id_motorista':fields.Integer,
   'id_prefeitura':fields.String,
-  'id_instituicao_ensino':fields.Integer,
   'cidade_origem':fields.String,
   'cidade_destino':fields.String,
   'qtd_alunos':fields.Integer,
   'horario_saida':fields.String,
-  'horario_hegada':fields.String,
+  'horario_chegada':fields.String,
 }
 
 class Rota(db.Model):
   __tablename__ = "rota"
 
   id = db.Column(db.Integer, primary_key=True)
-  id_motorista = db.Column(db.Integer, db.ForeignKey('motorista.id_funcionario'))
   id_veiculo = db.Column(db.Integer, db.ForeignKey('veiculo.id'))
-  id_instituicao_ensino = db.Column(db.Integer, db.ForeignKey('instituicao_ensino.id'))
   id_prefeitura = db.Column(db.Integer, db.ForeignKey('prefeitura.id'))
   cidade_origem = db.Column(db.String, nullable=False)
   cidade_destino = db.Column(db.String, nullable=False)
@@ -28,7 +25,7 @@ class Rota(db.Model):
   horario_saida = db.Column(db.Time, nullable=False)
   horario_chegada = db.Column(db.Time, nullable=False)
 
-  def __init__(self, id_motorista, id_veiculo, id_instituicao_ensino,
+  def __init__(self, id_motorista, id_veiculo,
                id_prefeitura, cidade_origem, cidade_destino, qtd_alunos,
                horario_saida, horario_chegada
   ):
@@ -40,7 +37,6 @@ class Rota(db.Model):
       self.horario_saida=horario_saida
       self.horario_chegada=horario_chegada
       self.id_prefeitura=id_prefeitura
-      self.id_instituicao_ensino=id_instituicao_ensino
 
   def __repr__(self):
       return f'<Rota>'
