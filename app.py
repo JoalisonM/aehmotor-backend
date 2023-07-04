@@ -25,7 +25,8 @@ from resources.instituicaoEnsino import InstituicoesDeEnsino, InstituicaoDeEnsin
 from resources.funcionario import Funcionarios, FuncionarioById, FuncionarioByNome
 from resources.rota import Rotas, RotaById, RotaByCidadeDestino
 from resources.prefeitura import Prefeituras, PrefeituraById
-from resources.notificacao import EnviarEmailResource
+from resources.notificacaochegada import EnviarEmailResource
+from resources.notificacaosaida import EnviarEmailSaidaResource
 
 from resources.rota import Rotas, RotaById, RotaByCidadeDestino
 from resources.prefeitura import Prefeituras, PrefeituraById, PrefeituraByNome
@@ -95,7 +96,8 @@ api.add_resource(RotaById, '/rotas/<int:id>')
 api.add_resource(RotaByCidadeDestino,'/rotas/<cidade_destino>')
 api.add_resource(Prefeituras, '/prefeituras')
 api.add_resource(PrefeituraById, '/prefeituras/<int:id>')
-api.add_resource(EnviarEmailResource, '/enviar_email')
+api.add_resource(EnviarEmailResource, '/notificar_chegada')
+api.add_resource(EnviarEmailSaidaResource, '/notificar_saida')
 
 
 api.add_resource(PrefeituraByNome,'/prefeituras/<nome>')

@@ -1,7 +1,6 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from flask import request
 from flask_restful import Resource
 from helpers.auth.token_handler.token_verificador import token_verifica
 from helpers.database import db
@@ -13,23 +12,26 @@ from model.pretensao import *
 class EnviarEmailResource(Resource):
     @token_verifica
     def post(self, refresh_token, token_id):
-        # Obter dados do formulário da solicitação POST
-        #nome = data.get('nome')
-        destinatarios = db.session.query(Aluno.email)\
-            .join(Motorista, Motorista.id_funcionario==Viagem.id_funcionario)\
-            .join(Viagem, Viagem.id==Pretensao.id_viagem)\
-            .join(Pretensao, Pretensao.id_aluno==Aluno.id_pessoa)\
-            .filter(Motorista.id_funcionario==token_id).all()
-        mensagem = "Ei, o ônibus chegou !!!"
-
-        if not all([destinatarios, mensagem]):
-            return {'message': 'Erro: Todos os campos são obrigatórios'}, 400
-
         try:
+            # Obter dados do formulário da solicitação POST
+            motorista_alias = db.aliased(Motorista, flat=True)
+            destinatarios = db.session.query(Aluno.email)\
+                .join(Pretensao, Aluno.id_pessoa==Pretensao.id_aluno)\
+                .join(Viagem, Pretensao.id_viagem == Viagem.id)\
+                .join(motorista_alias, Viagem.id_funcionario == motorista_alias.id_funcionario)\
+                .filter(motorista_alias.id_funcionario==token_id).all()
+            mensagem = "Ei, o ônibus chegou !!!"
+
+            logger.info(f"{destinatarios}")
+
+            if not all([destinatarios, mensagem]):
+                return {'message': 'Erro: Todos os campos são obrigatórios'}, 400
+
             enviar_email(destinatarios, mensagem)
             return {'message': 'E-mail enviado com sucesso'}
         except Exception as e:
-            return {'message': f'Erro ao enviar o e-mail: {str(e)}'}, 500
+            logger.error(f"error: {e}")
+            return {'message': f'Erro ao enviar o e-mail'}, 404
 
 def enviar_email(destinatarios, mensagem):
     remetente = 'aehmotorsistemas@gmail.com'
