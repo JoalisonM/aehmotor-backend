@@ -15,8 +15,9 @@ rota_fields ={
   'turno': fields.String
 }
 
+
 class Rota(db.Model):
-  __tablename__ = "rota"
+    __tablename__ = "rota"
 
   id = db.Column(db.Integer, primary_key=True)
   id_motorista = db.Column(db.Integer, db.ForeignKey('motorista.id_funcionario'))
@@ -47,5 +48,5 @@ class Rota(db.Model):
       self.id_instituicao_ensino=id_instituicao_ensino
       self.turno = turno
 
-  def __repr__(self):
-      return f'<Rota>'
+    def __repr__(self):
+        return f'<Rota>'
