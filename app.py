@@ -16,6 +16,7 @@ from resources.passageiro import Passageiros, PassageiroById
 from resources.cidade import Cidades,CidadeById, CidadeByNome
 from resources.endereco import Enderecos, EnderecoById, EnderecoByLogradouro
 from resources.aluno import Alunos, AlunoById, AlunoByNome
+from resources.alunoRota import AlunoRota
 from resources.pessoa import Pessoas, PessoaById, PessoaByNome
 from resources.uf import Ufs, UfById, UfByNome
 from resources.instituicaoEnsino import InstituicoesDeEnsino, InstituicaoDeEnsinoById, InstituicaoDeEnsinoByNome
@@ -59,6 +60,7 @@ api.add_resource(VeiculoById,'/veiculos/<int:id>')
 api.add_resource(VeiculoByPlaca,'/veiculos/<placa>')
 api.add_resource(Passageiros, '/passageiros')
 api.add_resource(PassageiroById,'/passageiros/<int:id>')
+api.add_resource(AlunoRota,'/alunos/rotas/<int:id>')
 api.add_resource(Alunos, '/alunos')
 api.add_resource(AlunoById, '/alunos/<int:idPessoa>')
 api.add_resource(AlunoByNome,'/alunos/<query>')

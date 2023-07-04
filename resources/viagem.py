@@ -103,17 +103,3 @@ class ViagemById(Resource):
 
         message = Message("Viagem deletada com sucesso!", 3)
         return marshal(message, message_fields), 200
-
-
-class ViagemById(Resource):
-    def get(self, nome):
-        viagem = Viagem.query.filter_by(id=id).all()
-
-        if viagem is None:
-            logger.error(f"Viagem {id} não encontrada")
-
-            message = Message(f"Viagem {id} não encontrada", 1)
-            return marshal(message), 404
-
-        logger.info(f"Viagem {id} encontrada com sucesso!")
-        return marshal(viagem, viagem_fields), 200

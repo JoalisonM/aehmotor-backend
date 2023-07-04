@@ -1,7 +1,17 @@
-2023-07-03 01:09:55,528 WARNING _internal _log  * Debugger is active!
-2023-07-03 01:09:55,543 INFO _internal _log  * Debugger PIN: 724-239-092
-2023-07-03 01:12:02,981 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:02] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -
-2023-07-03 01:12:26,979 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:26] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -
-2023-07-03 01:12:43,973 INFO viagem get Viagens listadas com sucesso!
-2023-07-03 01:12:44,014 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:44] "GET /api/viagens HTTP/1.1" 200 -
-2023-07-03 01:12:48,738 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 01:12:48] "[31m[1mPUT /api/viagens/17 HTTP/1.1[0m" 405 -
+2023-07-03 17:42:33,967 WARNING _internal _log  * Debugger is active!
+2023-07-03 17:42:33,984 INFO _internal _log  * Debugger PIN: 724-239-092
+2023-07-03 17:43:49,101 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:43:49] "[31m[1mPATCH /api/pretensoes HTTP/1.1[0m" 405 -
+2023-07-03 17:43:55,463 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:43:55] "POST /api/login HTTP/1.1" 200 -
+2023-07-03 17:43:56,457 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:43:56] "POST /api/login HTTP/1.1" 200 -
+2023-07-03 17:44:20,205 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:44:20] "[31m[1mPATCH /api/pretensoes HTTP/1.1[0m" 405 -
+2023-07-03 17:44:24,795 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:44:24] "[31m[1mPATCH /api/pretensoes/3 HTTP/1.1[0m" 405 -
+2023-07-03 17:45:59,939 INFO pretensao get Pretensão das viagens listadas com sucesso!
+2023-07-03 17:45:59,986 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:45:59] "GET /api/pretensoes HTTP/1.1" 200 -
+2023-07-03 17:46:26,212 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:46:26] "[31m[1mPATCH /api/pretensoes HTTP/1.1[0m" 405 -
+2023-07-03 17:46:31,319 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:46:31] "[31m[1mPATCH /api/pretensoes/3 HTTP/1.1[0m" 405 -
+2023-07-03 17:46:46,333 INFO viagem get Viagens listadas com sucesso!
+2023-07-03 17:46:46,342 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:46:46] "GET /api/viagens HTTP/1.1" 200 -
+2023-07-03 17:47:18,574 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:47:18] "[33mGET /api/alunos-rotas/ HTTP/1.1[0m" 404 -
+2023-07-03 17:51:27,339 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:51:27] "[33mPOST /api/alunos-rotas/ HTTP/1.1[0m" 404 -
+2023-07-03 17:51:30,465 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:51:30] "[33mPOST /api/alunos-rotas HTTP/1.1[0m" 404 -
+2023-07-03 17:52:25,479 INFO _internal _log 127.0.0.1 - - [03/Jul/2023 17:52:25] "[33mPOST /api/alunos-rotas HTTP/1.1[0m" 404 -

@@ -6,7 +6,7 @@ from model.instituicaoEnsino import *
 from model.rota import *
 
 
-class AlunoRotas(Resource):
+class AlunoRota(Resource):
     def get(self, id):
         query = db.session.query(
             Rota.turno,
