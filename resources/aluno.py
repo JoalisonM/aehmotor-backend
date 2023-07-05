@@ -11,11 +11,11 @@ from helpers.database import db
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
-parser.add_argument('nome', type=str, help='Problema no nome', required=True)
-parser.add_argument('email', type=str, help='Problema no email', required=True)
-parser.add_argument('nascimento', type=str, help='Problema no nascimento', required=True)
-parser.add_argument('telefone', type=str, help='Problema no telefone', required=True)
-parser.add_argument('senha', type=str, help='Problema na senha', required=True)
+parser.add_argument('nome', type=str, help='Problema no nome', required=False)
+parser.add_argument('email', type=str, help='Problema no email', required=False)
+parser.add_argument('nascimento', type=str, help='Problema no nascimento', required=False)
+parser.add_argument('telefone', type=str, help='Problema no telefone', required=False)
+parser.add_argument('senha', type=str, help='Problema na senha', required=False)
 parser.add_argument('matricula', type=str, help='Problema na matrícula', required=False)
 parser.add_argument('curso', type=str, help='Problema no curso', required=False)
 parser.add_argument('turno', type=str, help='Problema no turno', required=False)
@@ -103,7 +103,7 @@ class AlunoById(Resource):
             message = Message("Error ao atualizar o aluno", 2)
             return marshal(message, message_fields), 404
 
-
+    @token_verifica
     def patch(self, refresh_token, token_id, idPessoa):
         args = parser.parse_args()
 
@@ -174,3 +174,17 @@ class AlunoByNome(Resource):
 
         logger.info(f"Aluno {query} encontrado com sucesso!")
         return marshal(alunos, aluno_fields), 200
+
+class AlunoMe(Resource):
+    @token_verifica
+    def get(self, refresh_token, token_id):
+        aluno = Aluno.query.get(token_id)
+
+        if aluno is None:
+            logger.error(f"Aluno {id} não encontrada")
+
+            message = Message(f"Aluno {id} não encontrada", 1)
+            return marshal(message), 404
+
+        logger.info(f"Aluno {id} encontrada com sucesso!")
+        return marshal(aluno, aluno_fields), 200

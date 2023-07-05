@@ -12,6 +12,7 @@ aluno_fields = {
   'matricula' : fields.String,
   'curso' : fields.String,
   'turno' : fields.String,
+  'tipo' : fields.String,
   'id_instituicao_ensino': fields.Integer,
 }
 

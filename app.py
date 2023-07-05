@@ -16,11 +16,16 @@ from resources.veiculo import Veiculos, VeiculoById, VeiculoByPlaca
 from resources.passageiro import Passageiros, PassageiroById
 from resources.cidade import Cidades,CidadeById, CidadeByNome
 from resources.endereco import Enderecos, EnderecoById, EnderecoByLogradouro
-from resources.aluno import Alunos, AlunoById, AlunoByNome
+from resources.aluno import Alunos, AlunoById, AlunoByNome, AlunoMe
+from resources.alunoRota import AlunoRotas
 from resources.pessoa import Pessoas, PessoaById, PessoaByNome, PessoaMe
 from resources.uf import Ufs, UfById, UfByNome
 from resources.instituicaoEnsino import InstituicoesDeEnsino, InstituicaoDeEnsinoById, InstituicaoDeEnsinoByNome
-from resources.funcionario import Funcionarios, FuncionarioById, FuncionarioByNome
+from resources.funcionario import Funcionarios, FuncionarioById, FuncionarioByNome, FuncionarioMe
+from resources.rota import Rotas, RotaById, RotaByCidadeDestino
+from resources.prefeitura import Prefeituras, PrefeituraById
+from resources.notificacao import EnviarEmailChegada, EnviarEmailSaida
+
 from resources.rota import Rotas, RotaById, RotaByCidadeDestino
 from resources.prefeitura import Prefeituras, PrefeituraById, PrefeituraByNome
 
@@ -46,8 +51,8 @@ cors.init_app(app)
 migrate.init_app(app, db)
 
 
-api.add_resource(PretensaoById,'/pretensoes/<int:id>')
 api.add_resource(Pretensoes, '/pretensoes')
+api.add_resource(PretensaoById,'/pretensoes/<int:id>')
 api.add_resource(Viagens, '/viagens')
 api.add_resource(ViagemById, '/viagens/<int:id>')
 api.add_resource(Logout, '/logout')
@@ -63,7 +68,8 @@ api.add_resource(PassageiroById,'/passageiros/<int:id>')
 api.add_resource(Alunos, '/alunos')
 api.add_resource(AlunoById, '/alunos/<int:idPessoa>')
 api.add_resource(AlunoByNome,'/alunos/<query>')
-# api.add_resource(AlunoRotas,'/aluno-rotas/<int:id>')
+api.add_resource(AlunoMe,'/alunos/me')
+api.add_resource(AlunoRotas,'/alunos-rotas/<int:id>')
 api.add_resource(Pessoas, '/pessoas')
 api.add_resource(PessoaById, '/pessoas/<int:id>')
 api.add_resource(PessoaByNome,'/pessoas/<nome>')
@@ -83,6 +89,7 @@ api.add_resource(InstituicaoDeEnsinoByNome,'/instituicoesDeEnsino/<nome>')
 api.add_resource(Funcionarios, '/funcionarios')
 api.add_resource(FuncionarioById, '/funcionarios/<int:id>')
 api.add_resource(FuncionarioByNome,'/funcionarios/<nome>')
+api.add_resource(FuncionarioMe,'/funcionarios/me')
 api.add_resource(Rotas, '/rotas')
 api.add_resource(RotaById, '/rotas/<int:id>')
 api.add_resource(RotaByCidadeDestino,'/rotas/<cidade_destino>')
@@ -91,6 +98,8 @@ api.add_resource(PrefeituraById, '/prefeituras/<int:id>')
 api.add_resource(PrefeituraByNome,'/prefeituras/<nome>')
 api.add_resource(RotaInstituicoesDeEnsino,'/rota-instituicoes')
 api.add_resource(RotasInstituicoesDeEnsino,'/rota-instituicoes/<int:id>')
+api.add_resource(EnviarEmailChegada, '/notificar_chegada')
+api.add_resource(EnviarEmailSaida, '/notificar_saida')
 
 # Blueprints para Restful
 app.register_blueprint(api_bp)

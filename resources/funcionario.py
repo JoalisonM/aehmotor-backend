@@ -118,3 +118,17 @@ class FuncionarioByNome(Resource):
 
         logger.info(f"Funcionário {id} encontrado com sucesso!")
         return marshal(funcionario, funcionario_fields), 200
+
+class FuncionarioMe(Resource):
+    @token_verifica
+    def get(self, refresh_token, token_id):
+        funcionario = Funcionario.query.get(token_id)
+
+        if funcionario is None:
+            logger.error(f"funcionario {id} não encontrada")
+
+            message = Message(f"funcionario {id} não encontrada", 1)
+            return marshal(message), 404
+
+        logger.info(f"funcionario {id} encontrada com sucesso!")
+        return marshal(funcionario, funcionario_fields), 200

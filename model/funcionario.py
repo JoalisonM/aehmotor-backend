@@ -11,6 +11,7 @@ funcionario_fields = {
   'telefone': fields.String,
   'senha' : fields.String,
   'cargo' : fields.String,
+  'tipo': fields.String,
 }
 
 class Funcionario(Pessoa):

@@ -4,6 +4,7 @@ from model.aluno import *
 from model.alunoRota import *
 from model.instituicaoEnsino import *
 from model.rota import *
+from model.rotaInstituicaoEnsino import *
 
 
 class AlunoRotas(Resource):
@@ -15,15 +16,17 @@ class AlunoRotas(Resource):
             Rota.horario_chegada,
             InstituicaoEnsino.nome
         )\
-        .join(Rota, Aluno.id_instituicao_ensino == Rota.id_instituicao_ensino)\
-        .join(InstituicaoEnsino, Rota.id_instituicao_ensino == InstituicaoEnsino.id)\
+        .select_from(Aluno)\
+        .join(RotaInstituicaoEnsino, Aluno.id_instituicao_ensino == RotaInstituicaoEnsino.id_instituicao_ensino)\
+        .join(Rota, RotaInstituicaoEnsino.id_rota == Rota.id)\
+        .join(InstituicaoEnsino, RotaInstituicaoEnsino.id_instituicao_ensino==InstituicaoEnsino.id)\
         .filter(Aluno.id_pessoa == id).all()
 
         result = []
         for tupla in query:
             aluno_rota_dict = {
                 'turno': tupla[0],
-                'cidade_origem': tupla[1],
+                'cidade_destino': tupla[1],
                 'horario_saida': tupla[2],
                 'horario_chegada': tupla[3],
                 'nome_instituicao_ensino': tupla[4]

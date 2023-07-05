@@ -4,7 +4,6 @@ from helpers.database import db
 rota_fields ={
   'id': fields.Integer,
   'id_veiculo':fields.Integer,
-  'id_motorista':fields.Integer,
   'id_prefeitura':fields.String,
   'cidade_origem':fields.String,
   'cidade_destino':fields.String,
@@ -37,6 +36,18 @@ class Rota(db.Model):
         self.cidade_origem=cidade_origem
         self.cidade_destino=cidade_destino
         self.id_motorista=id_motorista
+        self.qtd_alunos=qtd_alunos
+        self.id_veiculo=id_veiculo
+        self.horario_saida=horario_saida
+        self.horario_chegada=horario_chegada
+        self.id_prefeitura=id_prefeitura
+        self.turno = turno
+    def __init__(self, id_veiculo,
+                id_prefeitura, cidade_origem, cidade_destino, qtd_alunos,
+                horario_saida, horario_chegada,turno
+    ):
+        self.cidade_origem=cidade_origem
+        self.cidade_destino=cidade_destino
         self.qtd_alunos=qtd_alunos
         self.id_veiculo=id_veiculo
         self.horario_saida=horario_saida

@@ -12,7 +12,6 @@ from helpers.database import db
 from helpers.base_logger import logger
 
 parser = reqparse.RequestParser()
-parser.add_argument('id_motorista', type=str, help='Problema no id do motorista', required=True)
 parser.add_argument('id_veiculo', type=str, help='Problema no id do veiculo', required=True)
 parser.add_argument('id_prefeitura', type=str, help='Problema no id do prefeitura', required=True)
 parser.add_argument('cidade_origem', type=str, help='Problema na cidade de origem', required=True)
@@ -35,7 +34,6 @@ class Rotas(Resource):
     def post(self, refresh_token, token_tipo):
         args = parser.parse_args()
         try:
-            id_motorista = args["id_motorista"]
             id_veiculo = args["id_veiculo"]
             id_prefeitura = args["id_prefeitura"]
             cidade_origem = args["cidade_origem"]
@@ -46,7 +44,7 @@ class Rotas(Resource):
             instituicoes_ensino = [int(id) for id in args['instituicoes_ensino'].split(',')]
             turno = args["turno"]
 
-            rota = Rota(id_motorista, id_veiculo,
+            rota = Rota(id_veiculo,
                         id_prefeitura, cidade_origem, cidade_destino,
                         qtd_alunos, horario_saida, horario_chegada,turno
             )

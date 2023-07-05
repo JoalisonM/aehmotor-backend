@@ -88,8 +88,8 @@ class PretensaoById(Resource):
             message = Message("Erro ao atualizar pretensão de viagem", 2)
             return marshal(message, message_fields), 404
 
-    @token_verifica
-    def patch(self, refresh_token, token_tipo, id):
+    # @token_verifica
+    def patch(self, id):
         try:
             pretensao = Pretensao.query.get(id)
 
@@ -125,16 +125,3 @@ class PretensaoById(Resource):
 
         message = Message("Pretensão de viagem deletada com sucesso!", 3)
         return marshal(message, message_fields), 200
-
-class PretensaoById(Resource):
-    def get(self, nome):
-        pretensao = Pretensao.query.filter_by(id=id).all()
-
-        if pretensao is None:
-            logger.error(f"Pretensão da viagem {id} não encontrada")
-
-            message = Message(f"Pretensão da viagem {id} não encontrada", 1)
-            return marshal(message), 404
-
-        logger.info(f"Pretensão da viagem {id} encontrada com sucesso!")
-        return marshal(pretensao, pretensao_fields), 200
